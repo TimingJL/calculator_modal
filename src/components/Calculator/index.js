@@ -1,17 +1,23 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import Numbers from "./Numbers";
+import CalculateOperators from "./CalculateOperators";
+import OtherOperator from "./OtherOperator";
 
 const useStyles = makeStyles(() => ({
   root: (props) => ({
     width: props.fullWidth ? "100%" : props.width,
-    height: props.fullWidth ? "100%" : 500,
+    height: props.fullWidth ? "100%" : "auto",
+    overflowY: "auto",
     backgroundImage: "linear-gradient(#84baff, #0b0e1c)",
     display: "flex",
     flexDirection: "column",
   }),
-  buttonsContainer: {
+  buttonsContainer: (props) => ({
     flex: "1 1 auto",
+    width: props.fullWidth ? "100vw" : props.width,
+    height: props.fullWidth ? "125vw" : props.width * 1.25,
 
     display: "grid",
     gridTemplateColumns: "repeat(4, 1fr)",
@@ -23,19 +29,17 @@ const useStyles = makeStyles(() => ({
       "numbers numbers numbers calculateOperators"
       "numbers numbers numbers calculateOperators"
     `,
-  },
+  }),
   otherOperator: {
     gridArea: "other",
-    background: "grey",
   },
   calculateOperators: {
     gridArea: "calculateOperators",
-    background: "blue",
   },
-  numbers: {
-    gridArea: "numbers",
-    background: "black",
-  },
+  inputForm: (props) => ({
+    minHeight: 96,
+    marginTop: props.fullWidth ? 0 : 24,
+  }),
 }));
 
 const Calculator = ({ fullWidth }) => {
@@ -43,11 +47,11 @@ const Calculator = ({ fullWidth }) => {
   const classes = useStyles({ fullWidth, width: matches ? 480 : 360 });
   return (
     <div className={classes.root}>
-      <div>input form</div>
+      <div className={classes.inputForm}>input form</div>
       <div className={classes.buttonsContainer}>
-        <div className={classes.otherOperator} />
-        <div className={classes.numbers} />
-        <div className={classes.calculateOperators} />
+        <OtherOperator />
+        <Numbers />
+        <CalculateOperators />
       </div>
     </div>
   );
