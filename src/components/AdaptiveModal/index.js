@@ -7,7 +7,26 @@ import {
   SlideUpTransition,
   ZoomInTransition,
 } from "components/TransitionComponents";
+import { makeStyles } from "@material-ui/core/styles";
+import DragHandleIcon from "@material-ui/icons/DragHandle";
 import { BottomSheetModal, DraggableModal } from "./styles";
+
+const useStyles = makeStyles(() => ({
+  container: {
+    height: "100%",
+  },
+  draggableTitle: {
+    width: "100%",
+    height: 24,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+  },
+  draggableIcon: {
+    cursor: "move",
+  },
+}));
 
 const DRAGGABLE_DIALOG_TITLE_ID = "draggable-dialog-title";
 const KEY_BOTTOM_SHEET = "bottom-sheet";
@@ -25,23 +44,23 @@ const DraggableComponent = (props) => (
 const PaperComponent = (props) => <Paper {...props} />;
 
 const AdaptiveModal = ({ variant, open, handleClose, content }) => {
+  const classes = useStyles();
   const modalMapping = {
     [KEY_BOTTOM_SHEET]: {
       modal: BottomSheetModal,
-      transition: SlideUpTransition,
-      paperComponent: DraggableComponent,
+      transitionComponent: SlideUpTransition,
+      paperComponent: PaperComponent,
     },
     [KEY_DRAGGABLE_MODAL]: {
       modal: DraggableModal,
-      transition: ZoomInTransition,
-      paperComponent: PaperComponent,
+      transitionComponent: ZoomInTransition,
+      paperComponent: DraggableComponent,
     },
   };
   const selectedMode =
     modalMapping[variant] || modalMapping[KEY_DRAGGABLE_MODAL];
   const Modal = selectedMode.modal;
-  const transitionComponent = selectedMode.transition;
-  const { paperComponent } = selectedMode;
+  const { transitionComponent, paperComponent } = selectedMode;
   return (
     <Modal
       open={open}
@@ -49,9 +68,15 @@ const AdaptiveModal = ({ variant, open, handleClose, content }) => {
       TransitionComponent={transitionComponent}
       PaperComponent={paperComponent}
     >
-      <div style={{ cursor: "move" }} id={DRAGGABLE_DIALOG_TITLE_ID}>
-        {content}
-      </div>
+      {variant === KEY_DRAGGABLE_MODAL && (
+        <div className={classes.draggableTitle}>
+          <DragHandleIcon
+            id={DRAGGABLE_DIALOG_TITLE_ID}
+            className={classes.draggableIcon}
+          />
+        </div>
+      )}
+      {content}
     </Modal>
   );
 };
