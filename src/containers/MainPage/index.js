@@ -22,7 +22,7 @@ const MainPage = () => {
         variant={variant}
         open={isModalOpen}
         handleClose={handleOnModalClose}
-        content={<Calculator />}
+        content={<Calculator fullWidth={isMobile} />}
       />
     </div>
   );
