@@ -51,19 +51,17 @@ const AdaptiveModal = ({ variant, open, handleClose }) => {
   };
   const Modal = modalStylesMapping[variant] || DraggableModal;
   return (
-    <div>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        PaperComponent={
-          variant === KEY_DRAGGABLE_MODAL ? DraggableComponent : PaperComponent
-        }
-      >
-        <div style={{ cursor: "move" }} id={DRAGGABLE_DIALOG_TITLE_ID}>
-          {variant}
-        </div>
-      </Modal>
-    </div>
+    <Modal
+      open={open}
+      onClose={handleClose}
+      PaperComponent={
+        variant === KEY_DRAGGABLE_MODAL ? DraggableComponent : PaperComponent
+      }
+    >
+      <div style={{ cursor: "move" }} id={DRAGGABLE_DIALOG_TITLE_ID}>
+        {variant}
+      </div>
+    </Modal>
   );
 };
 
