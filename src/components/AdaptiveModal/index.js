@@ -54,21 +54,29 @@ const DraggableModal = withStyles(() => ({
 }))(Dialog);
 
 const AdaptiveModal = ({ variant, open, handleClose }) => {
-  const modalStylesMapping = {
-    [KEY_BOTTOM_SHEET]: BottomSheetModal,
-    [KEY_DRAGGABLE_MODAL]: DraggableModal,
+  const modalMapping = {
+    [KEY_BOTTOM_SHEET]: {
+      modal: BottomSheetModal,
+      transition: SlideUpTransition,
+      paperComponent: DraggableComponent,
+    },
+    [KEY_DRAGGABLE_MODAL]: {
+      modal: DraggableModal,
+      transition: ZoomInTransition,
+      paperComponent: PaperComponent,
+    },
   };
-  const Modal = modalStylesMapping[variant] || DraggableModal;
+  const selectedMode =
+    modalMapping[variant] || modalMapping[KEY_DRAGGABLE_MODAL];
+  const Modal = selectedMode.modal;
+  const transitionComponent = selectedMode.transition;
+  const { paperComponent } = selectedMode;
   return (
     <Modal
       open={open}
       onClose={handleClose}
-      TransitionComponent={
-        variant === KEY_DRAGGABLE_MODAL ? ZoomInTransition : SlideUpTransition
-      }
-      PaperComponent={
-        variant === KEY_DRAGGABLE_MODAL ? DraggableComponent : PaperComponent
-      }
+      TransitionComponent={transitionComponent}
+      PaperComponent={paperComponent}
     >
       <div style={{ cursor: "move" }} id={DRAGGABLE_DIALOG_TITLE_ID}>
         {variant}
@@ -84,7 +92,7 @@ AdaptiveModal.propTypes = {
 };
 
 AdaptiveModal.defaultProps = {
-  variant: "draggable-modal",
+  variant: KEY_DRAGGABLE_MODAL,
   open: false,
   handleClose: () => {},
 };
