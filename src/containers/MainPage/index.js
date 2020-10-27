@@ -1,7 +1,8 @@
 import React, { useState, useCallback } from "react";
 import Button from "@material-ui/core/Button";
+import Calculator from "components/Calculator";
+import AdaptiveModal from "components/AdaptiveModal";
 import { isMobile } from "react-device-detect";
-import AdaptiveModal from "../../components/AdaptiveModal";
 
 const MainPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,6 +22,7 @@ const MainPage = () => {
         variant={variant}
         open={isModalOpen}
         handleClose={handleOnModalClose}
+        content={<Calculator />}
       />
     </div>
   );

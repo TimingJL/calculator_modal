@@ -24,7 +24,7 @@ const DraggableComponent = (props) => (
 
 const PaperComponent = (props) => <Paper {...props} />;
 
-const AdaptiveModal = ({ variant, open, handleClose }) => {
+const AdaptiveModal = ({ variant, open, handleClose, content }) => {
   const modalMapping = {
     [KEY_BOTTOM_SHEET]: {
       modal: BottomSheetModal,
@@ -50,7 +50,7 @@ const AdaptiveModal = ({ variant, open, handleClose }) => {
       PaperComponent={paperComponent}
     >
       <div style={{ cursor: "move" }} id={DRAGGABLE_DIALOG_TITLE_ID}>
-        {variant}
+        {content}
       </div>
     </Modal>
   );
@@ -60,12 +60,18 @@ AdaptiveModal.propTypes = {
   variant: PropTypes.string,
   open: PropTypes.bool,
   handleClose: PropTypes.func,
+  content: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.number,
+  ]),
 };
 
 AdaptiveModal.defaultProps = {
   variant: KEY_DRAGGABLE_MODAL,
   open: false,
   handleClose: () => {},
+  content: null,
 };
 
 export default AdaptiveModal;
