@@ -1,14 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import PropTypes from "prop-types";
-import Dialog from "@material-ui/core/Dialog";
-import { withStyles } from "@material-ui/core/styles";
 import Draggable from "react-draggable";
 import Paper from "@material-ui/core/Paper";
 import {
   SlideUpTransition,
   ZoomInTransition,
 } from "components/TransitionComponents";
+import { BottomSheetModal, DraggableModal } from "./styles";
 
 const DRAGGABLE_DIALOG_TITLE_ID = "draggable-dialog-title";
 const KEY_BOTTOM_SHEET = "bottom-sheet";
@@ -28,24 +27,6 @@ const DraggableComponent = (props) => {
 const PaperComponent = (props) => {
   return <Paper {...props} />;
 };
-
-const BottomSheetModal = withStyles(() => ({
-  paper: {
-    margin: 0,
-    position: "absolute",
-    bottom: 0,
-    borderRadius: 0,
-    width: "100%",
-    height: "50vh",
-  },
-}))(Dialog);
-
-const DraggableModal = withStyles(() => ({
-  paper: {
-    margin: 0,
-    borderRadius: 0,
-  },
-}))(Dialog);
 
 const AdaptiveModal = ({ variant, open, handleClose }) => {
   const modalMapping = {
