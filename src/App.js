@@ -1,9 +1,6 @@
-import MainPage from './containers/MainPage';
+import React from "react";
+import MainPage from "./containers/MainPage";
 
-function App() {
-  return (
-    <MainPage />
-  );
-}
+const App = () => <MainPage />;
 
 export default App;
