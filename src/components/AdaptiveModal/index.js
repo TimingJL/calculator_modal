@@ -13,20 +13,16 @@ const DRAGGABLE_DIALOG_TITLE_ID = "draggable-dialog-title";
 const KEY_BOTTOM_SHEET = "bottom-sheet";
 const KEY_DRAGGABLE_MODAL = "draggable-modal";
 
-const DraggableComponent = (props) => {
-  return (
-    <Draggable
-      handle={`#${DRAGGABLE_DIALOG_TITLE_ID}`}
-      cancel={'[class*="MuiDialogContent-root"]'}
-    >
-      <Paper {...props} />
-    </Draggable>
-  );
-};
+const DraggableComponent = (props) => (
+  <Draggable
+    handle={`#${DRAGGABLE_DIALOG_TITLE_ID}`}
+    cancel={'[class*="MuiDialogContent-root"]'}
+  >
+    <Paper {...props} />
+  </Draggable>
+);
 
-const PaperComponent = (props) => {
-  return <Paper {...props} />;
-};
+const PaperComponent = (props) => <Paper {...props} />;
 
 const AdaptiveModal = ({ variant, open, handleClose }) => {
   const modalMapping = {
