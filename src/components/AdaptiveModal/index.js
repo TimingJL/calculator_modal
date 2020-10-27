@@ -5,10 +5,20 @@ import Dialog from "@material-ui/core/Dialog";
 import { withStyles } from "@material-ui/core/styles";
 import Draggable from "react-draggable";
 import Paper from "@material-ui/core/Paper";
+import Slide from "@material-ui/core/Slide";
+import Zoom from "@material-ui/core/Zoom";
 
 const DRAGGABLE_DIALOG_TITLE_ID = "draggable-dialog-title";
 const KEY_BOTTOM_SHEET = "bottom-sheet";
 const KEY_DRAGGABLE_MODAL = "draggable-modal";
+
+const SlideUpTransition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+const ZoomInTransition = React.forwardRef(function Transition(props, ref) {
+  return <Zoom ref={ref} {...props} />;
+});
 
 const DraggableComponent = (props) => {
   return (
@@ -27,7 +37,6 @@ const PaperComponent = (props) => {
 
 const BottomSheetModal = withStyles(() => ({
   paper: {
-    background: "red",
     margin: 0,
     position: "absolute",
     bottom: 0,
@@ -54,6 +63,9 @@ const AdaptiveModal = ({ variant, open, handleClose }) => {
     <Modal
       open={open}
       onClose={handleClose}
+      TransitionComponent={
+        variant === KEY_DRAGGABLE_MODAL ? ZoomInTransition : SlideUpTransition
+      }
       PaperComponent={
         variant === KEY_DRAGGABLE_MODAL ? DraggableComponent : PaperComponent
       }
