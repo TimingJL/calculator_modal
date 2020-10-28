@@ -17,63 +17,62 @@ const useStyles = makeStyles(() => ({
     height: "calc(100% - 16px)",
     width: "calc(100% - 16px)",
     borderRadius: 50,
-    display: "grid",
-    gridTemplateRows: `repeat(${props.rows}, 1fr)`,
-    gridTemplateColumns: `repeat(${props.columns}, 1fr)`,
+    display: "flex",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: props.justifyContent,
     cursor: "pointer",
     "&:hover": {
       opacity: 0.7,
       background: props.background,
     },
   }),
-  text: () => ({
+  content: (props) => ({
     userSelect: "none",
-    fontSize: 36,
+    fontSize: props.fontSize || 36,
+    marginLeft: props.justifyContent === "flex-start" ? "16%" : 0,
   }),
 }));
 
 const CircularButton = ({
-  text,
+  content,
   color,
   background,
   justifyContent,
-  rows,
-  columns,
+  fontSize,
 }) => {
   const classes = useStyles({
     color,
     background,
     justifyContent,
-    rows,
-    columns,
+    fontSize,
   });
   return (
     <div className={classes.root}>
       <Button className={classes.button}>
-        <span className={classes.text}>{text}</span>
+        <span className={classes.content}>{content}</span>
       </Button>
     </div>
   );
 };
 
 CircularButton.propTypes = {
-  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  content: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.element,
+  ]),
   color: PropTypes.string,
   background: PropTypes.string,
   justifyContent: PropTypes.string,
-  rows: PropTypes.number,
-  columns: PropTypes.number,
+  fontSize: PropTypes.number,
 };
 
 CircularButton.defaultProps = {
-  text: "",
+  content: "",
   color: "",
   background: "",
   justifyContent: "center",
-  rows: 1,
-  columns: 1,
+  fontSize: 36,
 };
 
 export default CircularButton;
