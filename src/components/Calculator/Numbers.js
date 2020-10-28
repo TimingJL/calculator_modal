@@ -45,7 +45,12 @@ const Numbers = () => {
         ))}
       </div>
       <div className={classes.zero}>
-        <CircleButton text={0} background="#333333" color="#fff" />
+        <CircleButton
+          text={0}
+          background="#333333"
+          color="#fff"
+          justifyContent="flex-start"
+        />
       </div>
       <div className={classes.decimalPoint}>
         <CircleButton text="." background="#333333" color="#fff" />

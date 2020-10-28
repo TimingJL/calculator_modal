@@ -18,10 +18,8 @@ const useStyles = makeStyles(() => ({
     borderRadius: 50,
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: props.justifyContent,
     cursor: "pointer",
-    fontSize: 36,
-    userSelect: "none",
     "&:hover": {
       opacity: 0.8,
     },
@@ -29,13 +27,20 @@ const useStyles = makeStyles(() => ({
       opacity: 0.5,
     },
   }),
+  text: (props) => ({
+    marginLeft: props.justifyContent === "flex-start" ? "16%" : 0,
+    userSelect: "none",
+    fontSize: 36,
+  }),
 }));
 
-const CircleButton = ({ text, color, background }) => {
-  const classes = useStyles({ color, background });
+const CircleButton = ({ text, color, background, justifyContent }) => {
+  const classes = useStyles({ color, background, justifyContent });
   return (
     <div className={classes.root}>
-      <span className={classes.button}>{text}</span>
+      <div className={classes.button}>
+        <span className={classes.text}>{text}</span>
+      </div>
     </div>
   );
 };
@@ -44,12 +49,14 @@ CircleButton.propTypes = {
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   color: PropTypes.string,
   background: PropTypes.string,
+  justifyContent: PropTypes.string,
 };
 
 CircleButton.defaultProps = {
   text: "",
   color: "",
   background: "",
+  justifyContent: "center",
 };
 
 export default CircleButton;
