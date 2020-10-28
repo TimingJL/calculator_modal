@@ -17,24 +17,38 @@ const useStyles = makeStyles(() => ({
     height: "calc(100% - 16px)",
     width: "calc(100% - 16px)",
     borderRadius: 50,
-    display: "flex",
+    display: "grid",
+    gridTemplateRows: `repeat(${props.rows}, 1fr)`,
+    gridTemplateColumns: `repeat(${props.columns}, 1fr)`,
     alignItems: "center",
-    justifyContent: props.justifyContent,
+    justifyContent: "center",
     cursor: "pointer",
     "&:hover": {
       opacity: 0.7,
       background: props.background,
     },
   }),
-  text: (props) => ({
-    marginLeft: props.justifyContent === "flex-start" ? "16%" : 0,
+  text: () => ({
     userSelect: "none",
     fontSize: 36,
   }),
 }));
 
-const CircularButton = ({ text, color, background, justifyContent }) => {
-  const classes = useStyles({ color, background, justifyContent });
+const CircularButton = ({
+  text,
+  color,
+  background,
+  justifyContent,
+  rows,
+  columns,
+}) => {
+  const classes = useStyles({
+    color,
+    background,
+    justifyContent,
+    rows,
+    columns,
+  });
   return (
     <div className={classes.root}>
       <Button className={classes.button}>
@@ -49,6 +63,8 @@ CircularButton.propTypes = {
   color: PropTypes.string,
   background: PropTypes.string,
   justifyContent: PropTypes.string,
+  rows: PropTypes.number,
+  columns: PropTypes.number,
 };
 
 CircularButton.defaultProps = {
@@ -56,6 +72,8 @@ CircularButton.defaultProps = {
   color: "",
   background: "",
   justifyContent: "center",
+  rows: 1,
+  columns: 1,
 };
 
 export default CircularButton;

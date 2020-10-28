@@ -49,7 +49,7 @@ const Numbers = () => {
           text={0}
           background="#333333"
           color="#fff"
-          justifyContent="flex-start"
+          columns={2}
         />
       </div>
       <div className={classes.decimalPoint}>
