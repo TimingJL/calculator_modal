@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -21,10 +22,8 @@ const useStyles = makeStyles(() => ({
     justifyContent: props.justifyContent,
     cursor: "pointer",
     "&:hover": {
-      opacity: 0.8,
-    },
-    "&:active": {
-      opacity: 0.5,
+      opacity: 0.7,
+      background: props.background,
     },
   }),
   text: (props) => ({
@@ -38,9 +37,9 @@ const CircleButton = ({ text, color, background, justifyContent }) => {
   const classes = useStyles({ color, background, justifyContent });
   return (
     <div className={classes.root}>
-      <div className={classes.button}>
+      <Button className={classes.button}>
         <span className={classes.text}>{text}</span>
-      </div>
+      </Button>
     </div>
   );
 };
