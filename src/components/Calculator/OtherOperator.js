@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { PlusMinusIcon, PercentageIcon } from "components/Icons";
 import CircularButton from "./CircularButton";
 
 const useStyles = makeStyles(() => ({
@@ -16,14 +17,22 @@ const OtherOperator = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      {["a", "b", "c"].map((item) => (
-        <CircularButton
-          key={item}
-          text={item}
-          background="#afafaf"
-          color="black"
-        />
-      ))}
+      <CircularButton
+        content="AC"
+        background="#afafaf"
+        color="black"
+        fontSize={28}
+      />
+      <CircularButton
+        content={<PlusMinusIcon />}
+        background="#afafaf"
+        color="black"
+      />
+      <CircularButton
+        content={<PercentageIcon />}
+        background="#afafaf"
+        color="black"
+      />
     </div>
   );
 };

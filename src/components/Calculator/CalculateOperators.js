@@ -1,5 +1,12 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import {
+  DivideIcon,
+  TimesIcon,
+  MinusIcon,
+  PlusIcon,
+  EqualsIcon,
+} from "components/Icons";
 import CircularButton from "./CircularButton";
 
 const useStyles = makeStyles(() => ({
@@ -16,10 +23,10 @@ const CalculateOperators = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      {[1, 2, 3, 4, 5].map((item) => (
+      {[DivideIcon, TimesIcon, MinusIcon, PlusIcon, EqualsIcon].map((Icon) => (
         <CircularButton
-          key={item}
-          text={item}
+          key={Icon}
+          content={<Icon />}
           background="#3091fd"
           color="#fff"
         />

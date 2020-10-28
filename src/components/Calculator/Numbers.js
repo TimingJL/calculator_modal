@@ -38,7 +38,7 @@ const Numbers = () => {
         {[7, 8, 9, 4, 5, 6, 1, 2, 3].map((item) => (
           <CircularButton
             key={item}
-            text={item}
+            content={item}
             background="#333333"
             color="#fff"
           />
@@ -46,14 +46,14 @@ const Numbers = () => {
       </div>
       <div className={classes.zero}>
         <CircularButton
-          text={0}
+          content={0}
           background="#333333"
           color="#fff"
-          columns={2}
+          justifyContent="flex-start"
         />
       </div>
       <div className={classes.decimalPoint}>
-        <CircularButton text="." background="#333333" color="#fff" />
+        <CircularButton content="." background="#333333" color="#fff" />
       </div>
     </div>
   );
