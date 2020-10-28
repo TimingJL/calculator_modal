@@ -1,6 +1,4 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
-
 import Slide from "@material-ui/core/Slide";
 import Zoom from "@material-ui/core/Zoom";
 
