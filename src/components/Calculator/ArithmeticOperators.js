@@ -12,7 +12,7 @@ import CircularButton from "./CircularButton";
 
 const useStyles = makeStyles(() => ({
   root: {
-    gridArea: "calculateOperators",
+    gridArea: "arithmeticOperator",
 
     display: "grid",
     gridTemplateColumns: "repeat(1, 1fr)",
@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const CalculateOperators = ({ handleOnClick }) => {
+const ArithmeticOperators = ({ handleOnClick }) => {
   const classes = useStyles();
   const background = "#3091fd";
   const color = "#fff";
@@ -30,42 +30,42 @@ const CalculateOperators = ({ handleOnClick }) => {
         content={<DivideIcon />}
         background={background}
         color={color}
-        handleOnClick={() => handleOnClick("divide")}
+        handleOnClick={() => handleOnClick("/")}
       />
       <CircularButton
         content={<TimesIcon />}
         background={background}
         color={color}
-        handleOnClick={() => handleOnClick("times")}
+        handleOnClick={() => handleOnClick("*")}
       />
       <CircularButton
         content={<MinusIcon />}
         background={background}
         color={color}
-        handleOnClick={() => handleOnClick("minus")}
+        handleOnClick={() => handleOnClick("-")}
       />
       <CircularButton
         content={<PlusIcon />}
         background={background}
         color={color}
-        handleOnClick={() => handleOnClick("plus")}
+        handleOnClick={() => handleOnClick("+")}
       />
       <CircularButton
         content={<EqualsIcon />}
         background={background}
         color={color}
-        handleOnClick={() => handleOnClick("equals")}
+        handleOnClick={() => handleOnClick("=")}
       />
     </div>
   );
 };
 
-CalculateOperators.propTypes = {
+ArithmeticOperators.propTypes = {
   handleOnClick: PropTypes.func,
 };
 
-CalculateOperators.defaultProps = {
+ArithmeticOperators.defaultProps = {
   handleOnClick: () => {},
 };
 
-export default CalculateOperators;
+export default ArithmeticOperators;

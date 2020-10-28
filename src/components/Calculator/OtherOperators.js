@@ -6,7 +6,7 @@ import CircularButton from "./CircularButton";
 
 const useStyles = makeStyles(() => ({
   root: {
-    gridArea: "other",
+    gridArea: "otherOperator",
 
     display: "grid",
     gridTemplateColumns: "repeat(3, 1fr)",
@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const OtherOperator = ({ handleOnClick }) => {
+const OtherOperators = ({ handleOnClick }) => {
   const classes = useStyles();
   const background = "#afafaf";
   const color = "#000000";
@@ -43,12 +43,12 @@ const OtherOperator = ({ handleOnClick }) => {
   );
 };
 
-OtherOperator.propTypes = {
+OtherOperators.propTypes = {
   handleOnClick: PropTypes.func,
 };
 
-OtherOperator.defaultProps = {
+OtherOperators.defaultProps = {
   handleOnClick: () => {},
 };
 
-export default OtherOperator;
+export default OtherOperators;
