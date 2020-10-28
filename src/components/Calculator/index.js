@@ -1,4 +1,5 @@
-import React, { useState, useCallback } from "react";
+import React, { useCallback } from "react";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Numbers from "./Numbers";
@@ -44,8 +45,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Calculator = ({ fullWidth }) => {
-  const [value] = useState(0);
+const Calculator = ({ fullWidth, value }) => {
   const matches = useMediaQuery("(min-width:768px)");
   const classes = useStyles({ fullWidth, width: matches ? 480 : 360 });
   const handleOnClickButton = useCallback((buttonValue) => {
@@ -63,6 +63,16 @@ const Calculator = ({ fullWidth }) => {
       </div>
     </div>
   );
+};
+
+Calculator.propTypes = {
+  value: PropTypes.number,
+  fullWidth: PropTypes.bool,
+};
+
+Calculator.defaultProps = {
+  value: 0,
+  fullWidth: false,
 };
 
 export default Calculator;
