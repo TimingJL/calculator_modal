@@ -5,7 +5,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Numbers from "./Numbers";
 import ArithmeticOperators from "./ArithmeticOperators";
 import OtherOperators from "./OtherOperators";
-import InputForm from "./InputForm";
+import DisplayBoard from "./DisplayBoard";
 
 const useStyles = makeStyles(() => ({
   root: (props) => ({
@@ -45,7 +45,7 @@ const Calculator = ({ fullWidth, value, handleOnClick }) => {
 
   return (
     <div className={classes.root}>
-      <InputForm value={value} />
+      <DisplayBoard value={value} />
       <div className={classes.gridContainer}>
         <div className={classes.buttonsGrid}>
           <OtherOperators handleOnClick={handleOnClick} />

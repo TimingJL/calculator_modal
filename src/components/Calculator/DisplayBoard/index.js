@@ -6,7 +6,7 @@ const useStyles = makeStyles(() => ({
   root: (props) => ({
     minHeight: 96,
     marginTop: props.fullWidth ? 0 : 24,
-    margin: "0 16px",
+    padding: "0 16px",
     display: "flex",
     alignItems: "flex-end",
   }),
@@ -23,21 +23,21 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const InputForm = ({ value }) => {
+const DisplayBoard = ({ value }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <input className={classes.input} type="text" value={value} readOnly />
+      <div className={classes.input}>{value}</div>
     </div>
   );
 };
 
-InputForm.propTypes = {
+DisplayBoard.propTypes = {
   value: PropTypes.number,
 };
 
-InputForm.defaultProps = {
+DisplayBoard.defaultProps = {
   value: 0,
 };
 
-export default InputForm;
+export default DisplayBoard;
