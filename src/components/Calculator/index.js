@@ -14,10 +14,15 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexDirection: "column",
   }),
-  buttonsContainer: (props) => ({
-    flex: "1 1 auto",
+  gridContainer: (props) => ({
     width: props.fullWidth ? "100vw" : props.width,
     height: props.fullWidth ? "125vw" : props.width * 1.25,
+    padding: 8,
+    boxSizing: "border-box",
+  }),
+  buttonsGrid: () => ({
+    width: "100%",
+    height: "100%",
 
     display: "grid",
     gridTemplateColumns: "repeat(4, 1fr)",
@@ -48,10 +53,12 @@ const Calculator = ({ fullWidth }) => {
   return (
     <div className={classes.root}>
       <div className={classes.inputForm}>input form</div>
-      <div className={classes.buttonsContainer}>
-        <OtherOperator />
-        <Numbers />
-        <CalculateOperators />
+      <div className={classes.gridContainer}>
+        <div className={classes.buttonsGrid}>
+          <OtherOperator />
+          <Numbers />
+          <CalculateOperators />
+        </div>
       </div>
     </div>
   );
