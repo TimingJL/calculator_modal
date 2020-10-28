@@ -4,6 +4,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Numbers from "./Numbers";
 import CalculateOperators from "./CalculateOperators";
 import OtherOperator from "./OtherOperator";
+import InputForm from "./InputForm";
 
 const useStyles = makeStyles(() => ({
   root: (props) => ({
@@ -41,10 +42,6 @@ const useStyles = makeStyles(() => ({
   calculateOperators: {
     gridArea: "calculateOperators",
   },
-  inputForm: (props) => ({
-    minHeight: 96,
-    marginTop: props.fullWidth ? 0 : 24,
-  }),
 }));
 
 const Calculator = ({ fullWidth }) => {
@@ -52,7 +49,7 @@ const Calculator = ({ fullWidth }) => {
   const classes = useStyles({ fullWidth, width: matches ? 480 : 360 });
   return (
     <div className={classes.root}>
-      <div className={classes.inputForm}>input form</div>
+      <InputForm />
       <div className={classes.gridContainer}>
         <div className={classes.buttonsGrid}>
           <OtherOperator />
