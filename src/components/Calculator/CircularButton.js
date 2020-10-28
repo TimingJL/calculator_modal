@@ -39,6 +39,7 @@ const CircularButton = ({
   background,
   justifyContent,
   fontSize,
+  handleOnClick,
 }) => {
   const classes = useStyles({
     color,
@@ -46,9 +47,10 @@ const CircularButton = ({
     justifyContent,
     fontSize,
   });
+
   return (
     <div className={classes.root}>
-      <Button className={classes.button}>
+      <Button className={classes.button} onClick={handleOnClick}>
         <span className={classes.content}>{content}</span>
       </Button>
     </div>
@@ -65,6 +67,7 @@ CircularButton.propTypes = {
   background: PropTypes.string,
   justifyContent: PropTypes.string,
   fontSize: PropTypes.number,
+  handleOnClick: PropTypes.func,
 };
 
 CircularButton.defaultProps = {
@@ -73,6 +76,7 @@ CircularButton.defaultProps = {
   background: "",
   justifyContent: "center",
   fontSize: 36,
+  handleOnClick: () => {},
 };
 
 export default CircularButton;

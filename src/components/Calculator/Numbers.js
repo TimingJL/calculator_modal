@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import CircularButton from "./CircularButton";
 
@@ -30,7 +31,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Numbers = () => {
+const Numbers = ({ handleOnClick }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -41,6 +42,7 @@ const Numbers = () => {
             content={item}
             background="#333333"
             color="#fff"
+            handleOnClick={() => handleOnClick(item)}
           />
         ))}
       </div>
@@ -50,13 +52,27 @@ const Numbers = () => {
           background="#333333"
           color="#fff"
           justifyContent="flex-start"
+          handleOnClick={() => handleOnClick(0)}
         />
       </div>
       <div className={classes.decimalPoint}>
-        <CircularButton content="." background="#333333" color="#fff" />
+        <CircularButton
+          content="."
+          background="#333333"
+          color="#fff"
+          handleOnClick={() => handleOnClick(".")}
+        />
       </div>
     </div>
   );
+};
+
+Numbers.propTypes = {
+  handleOnClick: PropTypes.func,
+};
+
+Numbers.defaultProps = {
+  handleOnClick: () => {},
 };
 
 export default Numbers;

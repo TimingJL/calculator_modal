@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   DivideIcon,
@@ -19,20 +20,52 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const CalculateOperators = () => {
+const CalculateOperators = ({ handleOnClick }) => {
   const classes = useStyles();
+  const background = "#3091fd";
+  const color = "#fff";
   return (
     <div className={classes.root}>
-      {[DivideIcon, TimesIcon, MinusIcon, PlusIcon, EqualsIcon].map((Icon) => (
-        <CircularButton
-          key={Icon}
-          content={<Icon />}
-          background="#3091fd"
-          color="#fff"
-        />
-      ))}
+      <CircularButton
+        content={<DivideIcon />}
+        background={background}
+        color={color}
+        handleOnClick={() => handleOnClick("divide")}
+      />
+      <CircularButton
+        content={<TimesIcon />}
+        background={background}
+        color={color}
+        handleOnClick={() => handleOnClick("times")}
+      />
+      <CircularButton
+        content={<MinusIcon />}
+        background={background}
+        color={color}
+        handleOnClick={() => handleOnClick("minus")}
+      />
+      <CircularButton
+        content={<PlusIcon />}
+        background={background}
+        color={color}
+        handleOnClick={() => handleOnClick("plus")}
+      />
+      <CircularButton
+        content={<EqualsIcon />}
+        background={background}
+        color={color}
+        handleOnClick={() => handleOnClick("equals")}
+      />
     </div>
   );
+};
+
+CalculateOperators.propTypes = {
+  handleOnClick: PropTypes.func,
+};
+
+CalculateOperators.defaultProps = {
+  handleOnClick: () => {},
 };
 
 export default CalculateOperators;

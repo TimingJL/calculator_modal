@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
@@ -22,13 +23,21 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const InputForm = () => {
+const InputForm = ({ value }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <input className={classes.input} type="text" value={0} readOnly />
+      <input className={classes.input} type="text" value={value} readOnly />
     </div>
   );
+};
+
+InputForm.propTypes = {
+  value: PropTypes.number,
+};
+
+InputForm.defaultProps = {
+  value: 0,
 };
 
 export default InputForm;

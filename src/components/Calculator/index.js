@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Numbers from "./Numbers";
@@ -45,16 +45,20 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Calculator = ({ fullWidth }) => {
+  const [value] = useState(0);
   const matches = useMediaQuery("(min-width:768px)");
   const classes = useStyles({ fullWidth, width: matches ? 480 : 360 });
+  const handleOnClickButton = useCallback((buttonValue) => {
+    console.log("buttonValue: ", buttonValue);
+  }, []);
   return (
     <div className={classes.root}>
-      <InputForm />
+      <InputForm value={value} />
       <div className={classes.gridContainer}>
         <div className={classes.buttonsGrid}>
-          <OtherOperator />
-          <Numbers />
-          <CalculateOperators />
+          <OtherOperator handleOnClick={handleOnClickButton} />
+          <Numbers handleOnClick={handleOnClickButton} />
+          <CalculateOperators handleOnClick={handleOnClickButton} />
         </div>
       </div>
     </div>
