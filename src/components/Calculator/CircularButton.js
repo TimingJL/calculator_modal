@@ -33,7 +33,7 @@ const useStyles = makeStyles(() => ({
   }),
 }));
 
-const CircleButton = ({ text, color, background, justifyContent }) => {
+const CircularButton = ({ text, color, background, justifyContent }) => {
   const classes = useStyles({ color, background, justifyContent });
   return (
     <div className={classes.root}>
@@ -44,18 +44,18 @@ const CircleButton = ({ text, color, background, justifyContent }) => {
   );
 };
 
-CircleButton.propTypes = {
+CircularButton.propTypes = {
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   color: PropTypes.string,
   background: PropTypes.string,
   justifyContent: PropTypes.string,
 };
 
-CircleButton.defaultProps = {
+CircularButton.defaultProps = {
   text: "",
   color: "",
   background: "",
   justifyContent: "center",
 };
 
-export default CircleButton;
+export default CircularButton;

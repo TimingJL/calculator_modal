@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import CircleButton from "./CircleButton";
+import CircularButton from "./CircularButton";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -17,7 +17,7 @@ const OtherOperator = () => {
   return (
     <div className={classes.root}>
       {["a", "b", "c"].map((item) => (
-        <CircleButton
+        <CircularButton
           key={item}
           text={item}
           background="#afafaf"

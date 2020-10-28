@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import CircleButton from "./CircleButton";
+import CircularButton from "./CircularButton";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -36,7 +36,7 @@ const Numbers = () => {
     <div className={classes.root}>
       <div className={classes.integer}>
         {[7, 8, 9, 4, 5, 6, 1, 2, 3].map((item) => (
-          <CircleButton
+          <CircularButton
             key={item}
             text={item}
             background="#333333"
@@ -45,7 +45,7 @@ const Numbers = () => {
         ))}
       </div>
       <div className={classes.zero}>
-        <CircleButton
+        <CircularButton
           text={0}
           background="#333333"
           color="#fff"
@@ -53,7 +53,7 @@ const Numbers = () => {
         />
       </div>
       <div className={classes.decimalPoint}>
-        <CircleButton text="." background="#333333" color="#fff" />
+        <CircularButton text="." background="#333333" color="#fff" />
       </div>
     </div>
   );
