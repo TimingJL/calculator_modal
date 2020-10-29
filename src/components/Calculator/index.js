@@ -39,13 +39,13 @@ const useStyles = makeStyles(() => ({
   }),
 }));
 
-const Calculator = ({ fullWidth, value, handleOnClick }) => {
+const Calculator = ({ fullWidth, value, operator, handleOnClick }) => {
   const matches = useMediaQuery("(min-width:768px)");
   const classes = useStyles({ fullWidth, width: matches ? 480 : 360 });
 
   return (
     <div className={classes.root}>
-      <DisplayBoard value={value} />
+      <DisplayBoard value={value} operator={operator} />
       <div className={classes.gridContainer}>
         <div className={classes.buttonsGrid}>
           <OtherOperators handleOnClick={handleOnClick} />
@@ -58,14 +58,16 @@ const Calculator = ({ fullWidth, value, handleOnClick }) => {
 };
 
 Calculator.propTypes = {
-  value: PropTypes.number,
   fullWidth: PropTypes.bool,
+  value: PropTypes.number,
+  operator: PropTypes.string,
   handleOnClick: PropTypes.func,
 };
 
 Calculator.defaultProps = {
-  value: 0,
   fullWidth: false,
+  value: 0,
+  operator: "",
   handleOnClick: () => {},
 };
 

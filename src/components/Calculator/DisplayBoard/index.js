@@ -7,37 +7,41 @@ const useStyles = makeStyles(() => ({
     minHeight: 96,
     marginTop: props.fullWidth ? 0 : 24,
     padding: "0 16px",
-    display: "flex",
-    alignItems: "flex-end",
+    textAlign: "right",
+    color: "white",
   }),
-  input: {
+  displayOperator: {
+    height: 20,
+  },
+  displayValue: {
     appearance: "none",
     outline: "none",
     border: "none",
     background: "none",
     fontSize: 68,
-    color: "white",
-    textAlign: "right",
     width: "100%",
     boxSizing: "border-box",
   },
 }));
 
-const DisplayBoard = ({ value }) => {
+const DisplayBoard = ({ value, operator }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <div className={classes.input}>{value}</div>
+      <div className={classes.displayOperator}>{operator}</div>
+      <div className={classes.displayValue}>{value}</div>
     </div>
   );
 };
 
 DisplayBoard.propTypes = {
   value: PropTypes.number,
+  operator: PropTypes.string,
 };
 
 DisplayBoard.defaultProps = {
   value: 0,
+  operator: "",
 };
 
 export default DisplayBoard;
