@@ -1,8 +1,8 @@
 import update from "react-addons-update";
 import { evaluate } from "mathjs";
 import {
-  CLICK_NUMBER,
-  CLICK_ARITHMETIC_OPERATOR,
+  UPDATE_NUMBERS,
+  CALCULATE_ARITHMETIC_OPERATION,
   CLICK_EQUALS,
   ALL_CLEAR,
   CLICK_PLUS_MINUS,
@@ -20,7 +20,7 @@ const execEquals = (state) => {
   const { temp, operator } = state;
   if (operator && operator !== "=") {
     const expression = `${temp[0]}${operator}${temp[1]}`;
-    const updatedValue = evaluate(expression);
+    const updatedValue = evaluate(expression).toString();
     return update(state, {
       value: { $set: updatedValue },
       operator: { $set: "=" },
@@ -30,7 +30,7 @@ const execEquals = (state) => {
   return state;
 };
 
-const updateNumber = (state, number) => {
+const updateNumbers = (state, number) => {
   const { temp, operator } = state;
   if (operator === "=") {
     const updatedValue =
@@ -66,7 +66,7 @@ const updatePlusMinus = (state) => {
   return updatedState;
 };
 
-const execArithmeticOperation = (state, operator) => {
+const calculateArithmeticOperation = (state, operator) => {
   const { temp } = state;
   if (temp[1] !== "0") {
     const expression = `${temp[0]}${operator}${temp[1]}`;
@@ -86,25 +86,36 @@ const translateIntegerToFloat = (state) => {
   const { temp, operator } = state;
   const tempIndex = operator && operator !== "=" ? 1 : 0;
   let updatedValue = temp[tempIndex];
+  if (operator === "=") {
+    updatedValue = "0.";
+    return update(state, {
+      value: { $set: updatedValue },
+      temp: {
+        [tempIndex]: { $set: updatedValue },
+      },
+      operator: { $set: "" },
+    });
+  }
   if (updatedValue.indexOf(".") < 0) {
     updatedValue = `${updatedValue}.`;
+    return update(state, {
+      value: { $set: updatedValue },
+      temp: {
+        [tempIndex]: { $set: updatedValue },
+      },
+    });
   }
-  return update(state, {
-    value: { $set: updatedValue },
-    temp: {
-      [tempIndex]: { $set: updatedValue },
-    },
-  });
+  return state;
 };
 
 export default (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
-    case CLICK_NUMBER: {
-      return updateNumber(state, payload.number.toString());
+    case UPDATE_NUMBERS: {
+      return updateNumbers(state, payload.number.toString());
     }
-    case CLICK_ARITHMETIC_OPERATOR: {
-      return execArithmeticOperation(state, payload.operator);
+    case CALCULATE_ARITHMETIC_OPERATION: {
+      return calculateArithmeticOperation(state, payload.operator);
     }
     case CLICK_EQUALS: {
       return execEquals(state);

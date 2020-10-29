@@ -6,8 +6,8 @@ import Calculator from "components/Calculator";
 import AdaptiveModal from "components/AdaptiveModal";
 import { isMobile } from "react-device-detect";
 import {
-  clickNumber,
-  clickArithmeticOperator,
+  updateNumbers,
+  calculateArithmeticOperation,
   clickEquals,
   allClear,
   clickPlusMinus,
@@ -18,8 +18,8 @@ import {
 const MainPage = ({
   value,
   operator,
-  handleOnClickNumber,
-  handleOnClickArithmeticOperator,
+  handleUpdateNumbers,
+  handleCalculateArithmeticOperation,
   handleOnClickEquals,
   handleOnAllClear,
   handleOnClickPlusMinus,
@@ -39,11 +39,11 @@ const MainPage = ({
 
   const handleOnClickCalculatorButton = useCallback((buttonValue) => {
     if (typeof buttonValue === "number") {
-      handleOnClickNumber(buttonValue);
+      handleUpdateNumbers(buttonValue);
       return;
     }
     if (["+", "-", "*", "/"].indexOf(buttonValue) > -1) {
-      handleOnClickArithmeticOperator(buttonValue);
+      handleCalculateArithmeticOperation(buttonValue);
       return;
     }
     if (buttonValue === "=") {
@@ -94,8 +94,8 @@ const MainPage = ({
 MainPage.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   operator: PropTypes.string,
-  handleOnClickNumber: PropTypes.func,
-  handleOnClickArithmeticOperator: PropTypes.func,
+  handleUpdateNumbers: PropTypes.func,
+  handleCalculateArithmeticOperation: PropTypes.func,
   handleOnClickEquals: PropTypes.func,
   handleOnAllClear: PropTypes.func,
   handleOnClickPlusMinus: PropTypes.func,
@@ -106,8 +106,8 @@ MainPage.propTypes = {
 MainPage.defaultProps = {
   value: 0,
   operator: "",
-  handleOnClickNumber: () => {},
-  handleOnClickArithmeticOperator: () => {},
+  handleUpdateNumbers: () => {},
+  handleCalculateArithmeticOperation: () => {},
   handleOnClickEquals: () => {},
   handleOnAllClear: () => {},
   handleOnClickPlusMinus: () => {},
@@ -124,9 +124,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  handleOnClickNumber: (number) => dispatch(clickNumber(number)),
-  handleOnClickArithmeticOperator: (operator) =>
-    dispatch(clickArithmeticOperator(operator)),
+  handleUpdateNumbers: (number) => dispatch(updateNumbers(number)),
+  handleCalculateArithmeticOperation: (operator) =>
+    dispatch(calculateArithmeticOperation(operator)),
   handleOnClickEquals: () => dispatch(clickEquals()),
   handleOnAllClear: () => dispatch(allClear()),
   handleOnClickPlusMinus: () => dispatch(clickPlusMinus()),

@@ -1,6 +1,6 @@
 const KEY = "calculator";
-const CLICK_NUMBER = `${KEY}/CLICK_NUMBER`;
-const CLICK_ARITHMETIC_OPERATOR = `${KEY}/CLICK_ARITHMETIC_OPERATOR`;
+const UPDATE_NUMBERS = `${KEY}/UPDATE_NUMBERS`;
+const CALCULATE_ARITHMETIC_OPERATION = `${KEY}/CALCULATE_ARITHMETIC_OPERATION`;
 const CLICK_EQUALS = `${KEY}/CLICK_EQUALS`;
 const ALL_CLEAR = `${KEY}/ALL_CLEAR`;
 const CLICK_PLUS_MINUS = `${KEY}/CLICK_PLUS_MINUS`;
@@ -8,8 +8,8 @@ const ADD_DECIMAL_POINT = `${KEY}/ADD_DECIMAL_POINT`;
 const TRANSLATE_TO_PERCENTAGE = `${KEY}/TRANSLATE_TO_PERCENTAGE`;
 
 export {
-  CLICK_NUMBER,
-  CLICK_ARITHMETIC_OPERATOR,
+  UPDATE_NUMBERS,
+  CALCULATE_ARITHMETIC_OPERATION,
   CLICK_EQUALS,
   ALL_CLEAR,
   CLICK_PLUS_MINUS,
@@ -17,15 +17,15 @@ export {
   TRANSLATE_TO_PERCENTAGE,
 };
 
-export const clickNumber = (number) => ({
-  type: CLICK_NUMBER,
+export const updateNumbers = (number) => ({
+  type: UPDATE_NUMBERS,
   payload: {
     number,
   },
 });
 
-export const clickArithmeticOperator = (operator) => ({
-  type: CLICK_ARITHMETIC_OPERATOR,
+export const calculateArithmeticOperation = (operator) => ({
+  type: CALCULATE_ARITHMETIC_OPERATION,
   payload: {
     operator,
   },
