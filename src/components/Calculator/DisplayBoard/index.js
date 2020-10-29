@@ -21,6 +21,7 @@ const useStyles = makeStyles(() => ({
     fontSize: 68,
     width: "100%",
     boxSizing: "border-box",
+    overflowX: "auto",
   },
 }));
 
