@@ -62,6 +62,22 @@ const updatePlusMinus = (state) => {
   return updatedState;
 };
 
+const execArithmeticOperation = (state, operator) => {
+  const { temp } = state;
+  if (temp[1] !== 0) {
+    const expression = `${temp[0]}${operator}${temp[1]}`;
+    const updatedValue = evaluate(expression);
+    return update(state, {
+      value: { $set: updatedValue },
+      temp: { $set: [updatedValue, 0] },
+      operator: { $set: operator },
+    });
+  }
+  return update(state, {
+    operator: { $set: operator },
+  });
+};
+
 export default (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
@@ -69,9 +85,7 @@ export default (state = initialState, action) => {
       return updateNumber(state, payload.number);
     }
     case CLICK_ARITHMETIC_OPERATOR: {
-      return update(state, {
-        operator: { $set: payload.operator },
-      });
+      return execArithmeticOperation(state, payload.operator);
     }
     case CLICK_EQUALS: {
       return execEquals(state);
