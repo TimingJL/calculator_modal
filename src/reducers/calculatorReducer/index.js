@@ -1,4 +1,3 @@
-/* eslint-disable no-eval */
 import update from "react-addons-update";
 import { evaluate } from "mathjs";
 import {
