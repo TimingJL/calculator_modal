@@ -70,7 +70,7 @@ const calculateArithmeticOperation = (state, operator) => {
   const { temp } = state;
   if (state.operator && state.operator !== "=") {
     const expression = `${temp[0]}${state.operator}${temp[1]}`;
-    const updatedValue = evaluate(expression);
+    const updatedValue = evaluate(expression).toString();
     return update(state, {
       value: { $set: updatedValue },
       temp: { $set: [updatedValue, "0"] },
@@ -108,6 +108,19 @@ const translateIntegerToFloat = (state) => {
   return state;
 };
 
+const translateToPercentage = (state) => {
+  const { temp, operator } = state;
+  const tempIndex = operator && operator !== "=" ? 1 : 0;
+  const expression = `${temp[tempIndex]} / 100`;
+  const updatedValue = evaluate(expression).toString();
+  return update(state, {
+    value: { $set: updatedValue },
+    temp: {
+      [tempIndex]: { $set: updatedValue },
+    },
+  });
+};
+
 export default (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
@@ -130,8 +143,7 @@ export default (state = initialState, action) => {
       return translateIntegerToFloat(state);
     }
     case TRANSLATE_TO_PERCENTAGE: {
-      console.log("TRANSLATE_TO_PERCENTAGE");
-      return state;
+      return translateToPercentage(state);
     }
     default:
       return state;
