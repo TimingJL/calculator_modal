@@ -8,7 +8,7 @@ import {
   CLICK_PLUS_MINUS,
   ADD_DECIMAL_POINT,
   TRANSLATE_TO_PERCENTAGE,
-} from "./actions";
+} from "actions/calculatorActions";
 
 const initialState = {
   temp: ["0", "0"],

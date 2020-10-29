@@ -13,7 +13,7 @@ import {
   clickPlusMinus,
   addDecimalPoint,
   translateToPercentage,
-} from "reducers/calculatorReducer/actions";
+} from "actions/calculatorActions";
 
 const MainPage = ({
   value,
