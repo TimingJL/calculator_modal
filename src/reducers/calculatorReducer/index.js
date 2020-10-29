@@ -6,12 +6,12 @@ import {
   CLICK_EQUALS,
   ALL_CLEAR,
   CLICK_PLUS_MINUS,
-  // ADD_DECIMAL_POINT,
+  ADD_DECIMAL_POINT,
 } from "./actions";
 
 const initialState = {
-  temp: [0, 0],
-  value: 0,
+  temp: ["0", "0"],
+  value: "0",
   operator: "",
 };
 
@@ -23,7 +23,7 @@ const execEquals = (state) => {
     return update(state, {
       value: { $set: updatedValue },
       operator: { $set: "=" },
-      temp: { $set: [updatedValue, 0] },
+      temp: { $set: [updatedValue, "0"] },
     });
   }
   return state;
@@ -32,16 +32,18 @@ const execEquals = (state) => {
 const updateNumber = (state, number) => {
   const { temp, operator } = state;
   if (operator === "=") {
-    const updatedValue = initialState.temp[0] * 10 + number;
+    const updatedValue =
+      initialState.temp[0] === "0" ? number : initialState.temp[0] + number;
     return update(state, {
       value: { $set: updatedValue },
-      temp: { $set: [updatedValue, 0] },
+      temp: { $set: [updatedValue, "0"] },
       operator: { $set: "" },
     });
   }
 
   const tempIndex = operator && operator !== "=" ? 1 : 0;
-  const updatedValue = temp[tempIndex] * 10 + number;
+  const updatedValue =
+    temp[tempIndex] === "0" ? number : temp[tempIndex] + number;
   return update(state, {
     value: { $set: updatedValue },
     temp: {
@@ -53,7 +55,7 @@ const updateNumber = (state, number) => {
 const updatePlusMinus = (state) => {
   const { temp, operator } = state;
   const tempIndex = operator ? 1 : 0;
-  const updatedValue = temp[tempIndex] * -1;
+  const updatedValue = temp[tempIndex] === "0" ? "0" : temp[tempIndex] * -1;
   const updatedState = update(state, {
     value: { $set: updatedValue },
     temp: {
@@ -65,12 +67,12 @@ const updatePlusMinus = (state) => {
 
 const execArithmeticOperation = (state, operator) => {
   const { temp } = state;
-  if (temp[1] !== 0) {
+  if (temp[1] !== "0") {
     const expression = `${temp[0]}${operator}${temp[1]}`;
     const updatedValue = evaluate(expression);
     return update(state, {
       value: { $set: updatedValue },
-      temp: { $set: [updatedValue, 0] },
+      temp: { $set: [updatedValue, "0"] },
       operator: { $set: operator },
     });
   }
@@ -79,23 +81,26 @@ const execArithmeticOperation = (state, operator) => {
   });
 };
 
-// const translateIntegerToFloat = (state) => {
-//   const { temp, operator } = state;
-//   const tempIndex = operator && operator !== "=" ? 1 : 0;
-//   const updatedValue = temp[tempIndex].toFixed(1);
-//   return update(state, {
-//     value: { $set: updatedValue },
-//     temp: {
-//       [tempIndex]: { $set: updatedValue },
-//     },
-//   });
-// };
+const translateIntegerToFloat = (state) => {
+  const { temp, operator } = state;
+  const tempIndex = operator && operator !== "=" ? 1 : 0;
+  let updatedValue = temp[tempIndex];
+  if (updatedValue.indexOf(".") < 0) {
+    updatedValue = `${updatedValue}.`;
+  }
+  return update(state, {
+    value: { $set: updatedValue },
+    temp: {
+      [tempIndex]: { $set: updatedValue },
+    },
+  });
+};
 
 export default (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case CLICK_NUMBER: {
-      return updateNumber(state, payload.number);
+      return updateNumber(state, payload.number.toString());
     }
     case CLICK_ARITHMETIC_OPERATOR: {
       return execArithmeticOperation(state, payload.operator);
@@ -109,9 +114,9 @@ export default (state = initialState, action) => {
     case CLICK_PLUS_MINUS: {
       return updatePlusMinus(state);
     }
-    // case ADD_DECIMAL_POINT: {
-    //   return translateIntegerToFloat(state);
-    // }
+    case ADD_DECIMAL_POINT: {
+      return translateIntegerToFloat(state);
+    }
     default:
       return state;
   }

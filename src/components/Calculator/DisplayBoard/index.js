@@ -35,7 +35,7 @@ const DisplayBoard = ({ value, operator }) => {
 };
 
 DisplayBoard.propTypes = {
-  value: PropTypes.number,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   operator: PropTypes.string,
 };
 

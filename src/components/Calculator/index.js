@@ -59,7 +59,7 @@ const Calculator = ({ fullWidth, value, operator, handleOnClick }) => {
 
 Calculator.propTypes = {
   fullWidth: PropTypes.bool,
-  value: PropTypes.number,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   operator: PropTypes.string,
   handleOnClick: PropTypes.func,
 };

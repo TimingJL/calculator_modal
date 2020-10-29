@@ -86,7 +86,7 @@ const MainPage = ({
 };
 
 MainPage.propTypes = {
-  value: PropTypes.number,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   operator: PropTypes.string,
   handleOnClickNumber: PropTypes.func,
   handleOnClickArithmeticOperator: PropTypes.func,
