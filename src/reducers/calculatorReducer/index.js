@@ -6,6 +6,7 @@ import {
   CLICK_EQUALS,
   ALL_CLEAR,
   CLICK_PLUS_MINUS,
+  // ADD_DECIMAL_POINT,
 } from "./actions";
 
 const initialState = {
@@ -78,6 +79,18 @@ const execArithmeticOperation = (state, operator) => {
   });
 };
 
+// const translateIntegerToFloat = (state) => {
+//   const { temp, operator } = state;
+//   const tempIndex = operator && operator !== "=" ? 1 : 0;
+//   const updatedValue = temp[tempIndex].toFixed(1);
+//   return update(state, {
+//     value: { $set: updatedValue },
+//     temp: {
+//       [tempIndex]: { $set: updatedValue },
+//     },
+//   });
+// };
+
 export default (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
@@ -96,6 +109,9 @@ export default (state = initialState, action) => {
     case CLICK_PLUS_MINUS: {
       return updatePlusMinus(state);
     }
+    // case ADD_DECIMAL_POINT: {
+    //   return translateIntegerToFloat(state);
+    // }
     default:
       return state;
   }

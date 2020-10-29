@@ -11,6 +11,7 @@ import {
   clickEquals,
   allClear,
   clickPlusMinus,
+  addDecimalPoint,
 } from "reducers/calculatorReducer/actions";
 
 const MainPage = ({
@@ -21,6 +22,7 @@ const MainPage = ({
   handleOnClickEquals,
   handleOnAllClear,
   handleOnClickPlusMinus,
+  handleOnAddDecimalPoint,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const variant = isMobile ? "bottom-sheet" : "draggable-modal";
@@ -44,6 +46,10 @@ const MainPage = ({
     }
     if (buttonValue === "=") {
       handleOnClickEquals();
+      return;
+    }
+    if (buttonValue === ".") {
+      handleOnAddDecimalPoint();
       return;
     }
     if (buttonValue === "allClear") {
@@ -87,6 +93,7 @@ MainPage.propTypes = {
   handleOnClickEquals: PropTypes.func,
   handleOnAllClear: PropTypes.func,
   handleOnClickPlusMinus: PropTypes.func,
+  handleOnAddDecimalPoint: PropTypes.func,
 };
 
 MainPage.defaultProps = {
@@ -97,6 +104,7 @@ MainPage.defaultProps = {
   handleOnClickEquals: () => {},
   handleOnAllClear: () => {},
   handleOnClickPlusMinus: () => {},
+  handleOnAddDecimalPoint: () => {},
 };
 
 const mapStateToProps = (state) => {
@@ -114,6 +122,7 @@ const mapDispatchToProps = (dispatch) => ({
   handleOnClickEquals: () => dispatch(clickEquals()),
   handleOnAllClear: () => dispatch(allClear()),
   handleOnClickPlusMinus: () => dispatch(clickPlusMinus()),
+  handleOnAddDecimalPoint: () => dispatch(addDecimalPoint()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

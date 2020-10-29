@@ -4,6 +4,7 @@ const CLICK_ARITHMETIC_OPERATOR = `${KEY}/CLICK_ARITHMETIC_OPERATOR`;
 const CLICK_EQUALS = `${KEY}/CLICK_EQUALS`;
 const ALL_CLEAR = `${KEY}/ALL_CLEAR`;
 const CLICK_PLUS_MINUS = `${KEY}/CLICK_PLUS_MINUS`;
+const ADD_DECIMAL_POINT = `${KEY}/ADD_DECIMAL_POINT`;
 
 export {
   CLICK_NUMBER,
@@ -11,6 +12,7 @@ export {
   CLICK_EQUALS,
   ALL_CLEAR,
   CLICK_PLUS_MINUS,
+  ADD_DECIMAL_POINT,
 };
 
 export const clickNumber = (number) => ({
@@ -37,4 +39,8 @@ export const allClear = () => ({
 
 export const clickPlusMinus = () => ({
   type: CLICK_PLUS_MINUS,
+});
+
+export const addDecimalPoint = () => ({
+  type: ADD_DECIMAL_POINT,
 });
