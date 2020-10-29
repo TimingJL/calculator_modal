@@ -19,7 +19,14 @@ const initialState = {
 const execEquals = (state) => {
   const { temp, operator } = state;
   if (operator && operator !== "=") {
-    const expression = `${temp[0]}${operator}${temp[1]}`;
+    const factor = 10 ** Math.max(temp[0].length, temp[1].length);
+    const expression =
+      ["*", "/"].indexOf(state.operator) > -1
+        ? `((${temp[0]}*${factor})${state.operator}(${temp[1]}*${factor}) / ${
+            factor * factor
+          })`
+        : `(((${temp[0]}*${factor})${state.operator}(${temp[1]}*${factor})) / ${factor})`;
+    console.log("expression: ", expression);
     const updatedValue = evaluate(expression).toString();
     return update(state, {
       value: { $set: updatedValue },
@@ -69,7 +76,13 @@ const updatePlusMinus = (state) => {
 const calculateArithmeticOperation = (state, operator) => {
   const { temp } = state;
   if (state.operator && state.operator !== "=") {
-    const expression = `${temp[0]}${state.operator}${temp[1]}`;
+    const factor = 10 ** Math.max(temp[0].length, temp[1].length);
+    const expression =
+      ["*", "/"].indexOf(state.operator) > -1
+        ? `((${temp[0]}*${factor})${state.operator}(${temp[1]}*${factor}) / ${
+            factor * factor
+          })`
+        : `(((${temp[0]}*${factor})${state.operator}(${temp[1]}*${factor})) / ${factor})`;
     const updatedValue = evaluate(expression).toString();
     return update(state, {
       value: { $set: updatedValue },
