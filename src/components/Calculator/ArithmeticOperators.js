@@ -30,31 +30,31 @@ const ArithmeticOperators = ({ handleOnClick }) => {
         content={<DivideIcon />}
         background={background}
         color={color}
-        handleOnClick={() => handleOnClick("/")}
+        handleOnClick={() => handleOnClick("/", "arithmeticOperator")}
       />
       <CircularButton
         content={<TimesIcon />}
         background={background}
         color={color}
-        handleOnClick={() => handleOnClick("*")}
+        handleOnClick={() => handleOnClick("*", "arithmeticOperator")}
       />
       <CircularButton
         content={<MinusIcon />}
         background={background}
         color={color}
-        handleOnClick={() => handleOnClick("-")}
+        handleOnClick={() => handleOnClick("-", "arithmeticOperator")}
       />
       <CircularButton
         content={<PlusIcon />}
         background={background}
         color={color}
-        handleOnClick={() => handleOnClick("+")}
+        handleOnClick={() => handleOnClick("+", "arithmeticOperator")}
       />
       <CircularButton
         content={<EqualsIcon />}
         background={background}
         color={color}
-        handleOnClick={() => handleOnClick("=")}
+        handleOnClick={() => handleOnClick("=", "equal")}
       />
     </div>
   );

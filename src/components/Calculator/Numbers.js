@@ -42,7 +42,7 @@ const Numbers = ({ handleOnClick }) => {
             content={item}
             background="#333333"
             color="#fff"
-            handleOnClick={() => handleOnClick(item)}
+            handleOnClick={() => handleOnClick(item, "number")}
           />
         ))}
       </div>
@@ -52,7 +52,7 @@ const Numbers = ({ handleOnClick }) => {
           background="#333333"
           color="#fff"
           justifyContent="flex-start"
-          handleOnClick={() => handleOnClick(0)}
+          handleOnClick={() => handleOnClick(0, "number")}
         />
       </div>
       <div className={classes.decimalPoint}>
@@ -60,7 +60,7 @@ const Numbers = ({ handleOnClick }) => {
           content="."
           background="#333333"
           color="#fff"
-          handleOnClick={() => handleOnClick(".")}
+          handleOnClick={() => handleOnClick(".", "decimalPoint")}
         />
       </div>
     </div>

@@ -25,19 +25,19 @@ const OtherOperators = ({ handleOnClick }) => {
         background={background}
         color={color}
         fontSize={28}
-        handleOnClick={() => handleOnClick("allClear")}
+        handleOnClick={() => handleOnClick("allClear", "allClear")}
       />
       <CircularButton
         content={<PlusMinusIcon />}
         background={background}
         color={color}
-        handleOnClick={() => handleOnClick("plusMinus")}
+        handleOnClick={() => handleOnClick("plusMinus", "plusMinus")}
       />
       <CircularButton
         content={<PercentageIcon />}
         background={background}
         color={color}
-        handleOnClick={() => handleOnClick("percentage")}
+        handleOnClick={() => handleOnClick("percentage", "percentage")}
       />
     </div>
   );

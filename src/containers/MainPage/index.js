@@ -37,35 +37,19 @@ const MainPage = ({
     setIsModalOpen(false);
   }, []);
 
-  const handleOnClickCalculatorButton = useCallback((buttonValue) => {
-    if (typeof buttonValue === "number") {
-      handleUpdateNumbers(buttonValue);
-      return;
-    }
-    if (["+", "-", "*", "/"].indexOf(buttonValue) > -1) {
-      handleCalculateArithmeticOperation(buttonValue);
-      return;
-    }
-    if (buttonValue === "=") {
-      handleOnClickEquals();
-      return;
-    }
-    if (buttonValue === ".") {
-      handleOnAddDecimalPoint();
-      return;
-    }
-    if (buttonValue === "allClear") {
-      handleOnAllClear();
-      return;
-    }
-    if (buttonValue === "plusMinus") {
-      handleOnClickPlusMinus();
-      return;
-    }
-    if (buttonValue === "percentage") {
-      handleTranslateToPercentage();
-    }
+  const handleOnClickCalculatorButton = useCallback((buttonValue, dataType) => {
+    const actionStrategies = {
+      number: (number) => handleUpdateNumbers(number),
+      arithmeticOperator: (param) => handleCalculateArithmeticOperation(param),
+      equal: (param) => handleOnClickEquals(param),
+      decimalPoint: () => handleOnAddDecimalPoint(),
+      allClear: () => handleOnAllClear(),
+      plusMinus: () => handleOnClickPlusMinus(),
+      percentage: () => handleTranslateToPercentage(),
+    };
 
+    const actionStrategy = actionStrategies[dataType];
+    actionStrategy(buttonValue);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
