@@ -12,6 +12,7 @@ import {
   allClear,
   clickPlusMinus,
   addDecimalPoint,
+  translateToPercentage,
 } from "reducers/calculatorReducer/actions";
 
 const MainPage = ({
@@ -23,6 +24,7 @@ const MainPage = ({
   handleOnAllClear,
   handleOnClickPlusMinus,
   handleOnAddDecimalPoint,
+  handleTranslateToPercentage,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const variant = isMobile ? "bottom-sheet" : "draggable-modal";
@@ -58,6 +60,10 @@ const MainPage = ({
     }
     if (buttonValue === "plusMinus") {
       handleOnClickPlusMinus();
+      return;
+    }
+    if (buttonValue === "percentage") {
+      handleTranslateToPercentage();
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -94,6 +100,7 @@ MainPage.propTypes = {
   handleOnAllClear: PropTypes.func,
   handleOnClickPlusMinus: PropTypes.func,
   handleOnAddDecimalPoint: PropTypes.func,
+  handleTranslateToPercentage: PropTypes.func,
 };
 
 MainPage.defaultProps = {
@@ -105,6 +112,7 @@ MainPage.defaultProps = {
   handleOnAllClear: () => {},
   handleOnClickPlusMinus: () => {},
   handleOnAddDecimalPoint: () => {},
+  handleTranslateToPercentage: () => {},
 };
 
 const mapStateToProps = (state) => {
@@ -123,6 +131,7 @@ const mapDispatchToProps = (dispatch) => ({
   handleOnAllClear: () => dispatch(allClear()),
   handleOnClickPlusMinus: () => dispatch(clickPlusMinus()),
   handleOnAddDecimalPoint: () => dispatch(addDecimalPoint()),
+  handleTranslateToPercentage: () => dispatch(translateToPercentage()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

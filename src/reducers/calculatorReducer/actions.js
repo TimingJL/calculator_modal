@@ -5,6 +5,7 @@ const CLICK_EQUALS = `${KEY}/CLICK_EQUALS`;
 const ALL_CLEAR = `${KEY}/ALL_CLEAR`;
 const CLICK_PLUS_MINUS = `${KEY}/CLICK_PLUS_MINUS`;
 const ADD_DECIMAL_POINT = `${KEY}/ADD_DECIMAL_POINT`;
+const TRANSLATE_TO_PERCENTAGE = `${KEY}/TRANSLATE_TO_PERCENTAGE`;
 
 export {
   CLICK_NUMBER,
@@ -13,6 +14,7 @@ export {
   ALL_CLEAR,
   CLICK_PLUS_MINUS,
   ADD_DECIMAL_POINT,
+  TRANSLATE_TO_PERCENTAGE,
 };
 
 export const clickNumber = (number) => ({
@@ -43,4 +45,8 @@ export const clickPlusMinus = () => ({
 
 export const addDecimalPoint = () => ({
   type: ADD_DECIMAL_POINT,
+});
+
+export const translateToPercentage = () => ({
+  type: TRANSLATE_TO_PERCENTAGE,
 });

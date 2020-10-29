@@ -7,6 +7,7 @@ import {
   ALL_CLEAR,
   CLICK_PLUS_MINUS,
   ADD_DECIMAL_POINT,
+  TRANSLATE_TO_PERCENTAGE,
 } from "./actions";
 
 const initialState = {
@@ -116,6 +117,10 @@ export default (state = initialState, action) => {
     }
     case ADD_DECIMAL_POINT: {
       return translateIntegerToFloat(state);
+    }
+    case TRANSLATE_TO_PERCENTAGE: {
+      console.log("TRANSLATE_TO_PERCENTAGE");
+      return state;
     }
     default:
       return state;
