@@ -10,6 +10,7 @@ import {
   clickArithmeticOperator,
   clickEquals,
   allClear,
+  clickPlusMinus,
 } from "reducers/calculatorReducer/actions";
 
 const MainPage = ({
@@ -19,6 +20,7 @@ const MainPage = ({
   handleOnClickArithmeticOperator,
   handleOnClickEquals,
   handleOnAllClear,
+  handleOnClickPlusMinus,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const variant = isMobile ? "bottom-sheet" : "draggable-modal";
@@ -46,6 +48,10 @@ const MainPage = ({
     }
     if (buttonValue === "allClear") {
       handleOnAllClear();
+      return;
+    }
+    if (buttonValue === "plusMinus") {
+      handleOnClickPlusMinus();
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -80,6 +86,7 @@ MainPage.propTypes = {
   handleOnClickArithmeticOperator: PropTypes.func,
   handleOnClickEquals: PropTypes.func,
   handleOnAllClear: PropTypes.func,
+  handleOnClickPlusMinus: PropTypes.func,
 };
 
 MainPage.defaultProps = {
@@ -89,6 +96,7 @@ MainPage.defaultProps = {
   handleOnClickArithmeticOperator: () => {},
   handleOnClickEquals: () => {},
   handleOnAllClear: () => {},
+  handleOnClickPlusMinus: () => {},
 };
 
 const mapStateToProps = (state) => {
@@ -105,6 +113,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(clickArithmeticOperator(operator)),
   handleOnClickEquals: () => dispatch(clickEquals()),
   handleOnAllClear: () => dispatch(allClear()),
+  handleOnClickPlusMinus: () => dispatch(clickPlusMinus()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
