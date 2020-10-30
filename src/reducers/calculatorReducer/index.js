@@ -27,16 +27,21 @@ const makeFactor = (params) => {
   return 10 ** factor;
 };
 
+const makeEvaluateExpression = (numbers, operator, factor) => {
+  const expression =
+    ["*", "/"].indexOf(operator) > -1
+      ? `((${numbers[0]}*${factor})${operator}(${numbers[1]}*${factor}) / ${
+          factor * factor
+        })`
+      : `(((${numbers[0]}*${factor})${operator}(${numbers[1]}*${factor})) / ${factor})`;
+  return expression;
+};
+
 const execEquals = (state) => {
   const { temp, operator } = state;
   if (operator && operator !== "=") {
     const factor = makeFactor(temp);
-    const expression =
-      ["*", "/"].indexOf(state.operator) > -1
-        ? `((${temp[0]}*${factor})${state.operator}(${temp[1]}*${factor}) / ${
-            factor * factor
-          })`
-        : `(((${temp[0]}*${factor})${state.operator}(${temp[1]}*${factor})) / ${factor})`;
+    const expression = makeEvaluateExpression(temp, state.operator, factor);
     const updatedValue = evaluate(expression).toString();
     return update(state, {
       value: { $set: updatedValue },
@@ -87,12 +92,7 @@ const calculateArithmeticOperation = (state, operator) => {
   const { temp } = state;
   if (state.operator && state.operator !== "=") {
     const factor = makeFactor(temp);
-    const expression =
-      ["*", "/"].indexOf(state.operator) > -1
-        ? `((${temp[0]}*${factor})${state.operator}(${temp[1]}*${factor}) / ${
-            factor * factor
-          })`
-        : `(((${temp[0]}*${factor})${state.operator}(${temp[1]}*${factor})) / ${factor})`;
+    const expression = makeEvaluateExpression(temp, state.operator, factor);
     const updatedValue = evaluate(expression).toString();
     return update(state, {
       value: { $set: updatedValue },
