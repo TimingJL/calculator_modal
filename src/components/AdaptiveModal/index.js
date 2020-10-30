@@ -6,26 +6,8 @@ import {
   SlideUpTransition,
   ZoomInTransition,
 } from "components/TransitionComponents";
-import { makeStyles } from "@material-ui/core/styles";
-import DragHandleIcon from "@material-ui/icons/DragHandle";
 import { BottomSheetModal, DraggableModal } from "./styles";
-
-const useStyles = makeStyles(() => ({
-  container: {
-    height: "100%",
-  },
-  draggableTitle: {
-    width: "100%",
-    height: 24,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    position: "absolute",
-  },
-  draggableIcon: {
-    cursor: "move",
-  },
-}));
+import DraggableTitle from "./DraggableTitle";
 
 const DRAGGABLE_DIALOG_TITLE_ID = "draggable-dialog-title";
 const KEY_BOTTOM_SHEET = "bottom-sheet";
@@ -43,7 +25,6 @@ const DraggableComponent = (props) => (
 const PaperComponent = (props) => <Paper {...props} />;
 
 const AdaptiveModal = ({ variant, open, handleClose, content }) => {
-  const classes = useStyles();
   const modalMapping = {
     [KEY_BOTTOM_SHEET]: {
       modal: BottomSheetModal,
@@ -60,6 +41,7 @@ const AdaptiveModal = ({ variant, open, handleClose, content }) => {
     modalMapping[variant] || modalMapping[KEY_DRAGGABLE_MODAL];
   const Modal = selectedMode.modal;
   const { transitionComponent, paperComponent } = selectedMode;
+
   return (
     <Modal
       open={open}
@@ -67,14 +49,10 @@ const AdaptiveModal = ({ variant, open, handleClose, content }) => {
       TransitionComponent={transitionComponent}
       PaperComponent={paperComponent}
     >
-      {variant === KEY_DRAGGABLE_MODAL && (
-        <div className={classes.draggableTitle}>
-          <DragHandleIcon
-            id={DRAGGABLE_DIALOG_TITLE_ID}
-            className={classes.draggableIcon}
-          />
-        </div>
-      )}
+      <DraggableTitle
+        titleId={DRAGGABLE_DIALOG_TITLE_ID}
+        isDraggable={variant === KEY_DRAGGABLE_MODAL}
+      />
       {content}
     </Modal>
   );
