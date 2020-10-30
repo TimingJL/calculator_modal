@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {
   DivideIcon,
   TimesIcon,
@@ -22,38 +22,41 @@ const useStyles = makeStyles(() => ({
 
 const ArithmeticOperators = ({ handleOnClick }) => {
   const classes = useStyles();
-  const background = "#3091fd";
-  const color = "#fff";
+  const {
+    calculator: {
+      button: { arithmeticOperator },
+    },
+  } = useTheme();
   return (
     <div className={classes.root}>
       <CircularButton
         content={<DivideIcon />}
-        background={background}
-        color={color}
+        background={arithmeticOperator.background}
+        color={arithmeticOperator.color}
         handleOnClick={() => handleOnClick("/", "arithmeticOperator")}
       />
       <CircularButton
         content={<TimesIcon />}
-        background={background}
-        color={color}
+        background={arithmeticOperator.background}
+        color={arithmeticOperator.color}
         handleOnClick={() => handleOnClick("*", "arithmeticOperator")}
       />
       <CircularButton
         content={<MinusIcon />}
-        background={background}
-        color={color}
+        background={arithmeticOperator.background}
+        color={arithmeticOperator.color}
         handleOnClick={() => handleOnClick("-", "arithmeticOperator")}
       />
       <CircularButton
         content={<PlusIcon />}
-        background={background}
-        color={color}
+        background={arithmeticOperator.background}
+        color={arithmeticOperator.color}
         handleOnClick={() => handleOnClick("+", "arithmeticOperator")}
       />
       <CircularButton
         content={<EqualsIcon />}
-        background={background}
-        color={color}
+        background={arithmeticOperator.background}
+        color={arithmeticOperator.color}
         handleOnClick={() => handleOnClick("=", "equal")}
       />
     </div>

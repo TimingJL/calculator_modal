@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import CircularButton from "./CircularButton";
 
 const useStyles = makeStyles(() => ({
@@ -33,6 +33,11 @@ const useStyles = makeStyles(() => ({
 
 const Numbers = ({ handleOnClick }) => {
   const classes = useStyles();
+  const {
+    calculator: {
+      button: { numbers },
+    },
+  } = useTheme();
   return (
     <div className={classes.root}>
       <div className={classes.integer}>
@@ -40,8 +45,8 @@ const Numbers = ({ handleOnClick }) => {
           <CircularButton
             key={item}
             content={item}
-            background="#333333"
-            color="#fff"
+            background={numbers.background}
+            color={numbers.color}
             handleOnClick={() => handleOnClick(item, "number")}
           />
         ))}
@@ -49,8 +54,8 @@ const Numbers = ({ handleOnClick }) => {
       <div className={classes.zero}>
         <CircularButton
           content={0}
-          background="#333333"
-          color="#fff"
+          background={numbers.background}
+          color={numbers.color}
           justifyContent="flex-start"
           handleOnClick={() => handleOnClick(0, "number")}
         />
@@ -58,8 +63,8 @@ const Numbers = ({ handleOnClick }) => {
       <div className={classes.decimalPoint}>
         <CircularButton
           content="."
-          background="#333333"
-          color="#fff"
+          background={numbers.background}
+          color={numbers.color}
           handleOnClick={() => handleOnClick(".", "decimalPoint")}
         />
       </div>

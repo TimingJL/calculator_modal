@@ -7,37 +7,42 @@ import ArithmeticOperators from "./ArithmeticOperators";
 import OtherOperators from "./OtherOperators";
 import DisplayBoard from "./DisplayBoard";
 
-const useStyles = makeStyles(() => ({
-  root: (props) => ({
-    width: props.fullWidth ? "100%" : props.width,
-    height: props.fullWidth ? "100%" : "auto",
-    overflowY: "auto",
-    backgroundImage: "linear-gradient(#84baff, #0b0e1c)",
-    display: "flex",
-    flexDirection: "column",
-  }),
-  gridContainer: (props) => ({
-    width: props.fullWidth ? "100vw" : props.width,
-    height: props.fullWidth ? "125vw" : props.width * 1.25,
-    padding: 8,
-    boxSizing: "border-box",
-  }),
-  buttonsGrid: () => ({
-    width: "100%",
-    height: "100%",
+const useStyles = makeStyles((theme) => {
+  const {
+    calculator: { background },
+  } = theme;
+  return {
+    root: (props) => ({
+      width: props.fullWidth ? "100%" : props.width,
+      height: props.fullWidth ? "100%" : "auto",
+      overflowY: "auto",
+      backgroundImage: background,
+      display: "flex",
+      flexDirection: "column",
+    }),
+    gridContainer: (props) => ({
+      width: props.fullWidth ? "100vw" : props.width,
+      height: props.fullWidth ? "125vw" : props.width * 1.25,
+      padding: 8,
+      boxSizing: "border-box",
+    }),
+    buttonsGrid: () => ({
+      width: "100%",
+      height: "100%",
 
-    display: "grid",
-    gridTemplateColumns: "repeat(4, 1fr)",
-    gridTemplateRows: "repeat(5, 1fr)",
-    gridTemplateAreas: `
-      "otherOperator otherOperator otherOperator arithmeticOperator"
-      "numbers numbers numbers arithmeticOperator"
-      "numbers numbers numbers arithmeticOperator"
-      "numbers numbers numbers arithmeticOperator"
-      "numbers numbers numbers arithmeticOperator"
-    `,
-  }),
-}));
+      display: "grid",
+      gridTemplateColumns: "repeat(4, 1fr)",
+      gridTemplateRows: "repeat(5, 1fr)",
+      gridTemplateAreas: `
+        "otherOperator otherOperator otherOperator arithmeticOperator"
+        "numbers numbers numbers arithmeticOperator"
+        "numbers numbers numbers arithmeticOperator"
+        "numbers numbers numbers arithmeticOperator"
+        "numbers numbers numbers arithmeticOperator"
+      `,
+    }),
+  };
+});
 
 const Calculator = ({ fullWidth, value, operator, handleOnClick }) => {
   const matches = useMediaQuery("(min-width:768px)");

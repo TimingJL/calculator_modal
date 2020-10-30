@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { PlusMinusIcon, PercentageIcon } from "components/Icons";
 import CircularButton from "./CircularButton";
 
@@ -16,27 +16,30 @@ const useStyles = makeStyles(() => ({
 
 const OtherOperators = ({ handleOnClick }) => {
   const classes = useStyles();
-  const background = "#afafaf";
-  const color = "#000000";
+  const {
+    calculator: {
+      button: { otherOperator },
+    },
+  } = useTheme();
   return (
     <div className={classes.root}>
       <CircularButton
         content="AC"
-        background={background}
-        color={color}
+        background={otherOperator.background}
+        color={otherOperator.color}
         fontSize={28}
         handleOnClick={() => handleOnClick("allClear", "allClear")}
       />
       <CircularButton
         content={<PlusMinusIcon />}
-        background={background}
-        color={color}
+        background={otherOperator.background}
+        color={otherOperator.color}
         handleOnClick={() => handleOnClick("plusMinus", "plusMinus")}
       />
       <CircularButton
         content={<PercentageIcon />}
-        background={background}
-        color={color}
+        background={otherOperator.background}
+        color={otherOperator.color}
         handleOnClick={() => handleOnClick("percentage", "percentage")}
       />
     </div>
