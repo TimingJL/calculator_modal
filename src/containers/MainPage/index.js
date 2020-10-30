@@ -1,8 +1,7 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, Suspense } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
-import Calculator from "components/Calculator";
 import AdaptiveModal from "components/AdaptiveModal";
 import { isMobile } from "react-device-detect";
 import {
@@ -14,6 +13,8 @@ import {
   addDecimalPoint,
   translateToPercentage,
 } from "actions/calculatorActions";
+
+const Calculator = React.lazy(() => import("components/Calculator"));
 
 const MainPage = ({
   value,
@@ -63,12 +64,14 @@ const MainPage = ({
         open={isModalOpen}
         handleClose={handleOnModalClose}
         content={
-          <Calculator
-            fullWidth={isMobile}
-            value={value}
-            operator={operator}
-            handleOnClick={handleOnClickCalculatorButton}
-          />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Calculator
+              fullWidth={isMobile}
+              value={value}
+              operator={operator}
+              handleOnClick={handleOnClickCalculatorButton}
+            />
+          </Suspense>
         }
       />
     </div>
