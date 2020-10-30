@@ -58,7 +58,8 @@ const updateNumbers = (state, number) => {
 const updatePlusMinus = (state) => {
   const { temp, operator } = state;
   const tempIndex = operator ? 1 : 0;
-  const updatedValue = temp[tempIndex] === "0" ? "0" : temp[tempIndex] * -1;
+  const updatedValue =
+    temp[tempIndex] === "0" ? "0" : (temp[tempIndex] * -1).toString();
   const updatedState = update(state, {
     value: { $set: updatedValue },
     temp: {
