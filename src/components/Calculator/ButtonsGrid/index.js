@@ -31,8 +31,8 @@ const useStyles = makeStyles(() => {
   };
 });
 
-const ButtonGrid = ({ fullWidth, matches, handleOnClick }) => {
-  const classes = useStyles({ fullWidth, width: matches ? 480 : 360 });
+const ButtonGrid = ({ fullWidth, width, handleOnClick }) => {
+  const classes = useStyles({ fullWidth, width });
   return (
     <div className={classes.gridContainer}>
       <div className={classes.buttonsGrid}>
@@ -46,13 +46,13 @@ const ButtonGrid = ({ fullWidth, matches, handleOnClick }) => {
 
 ButtonGrid.propTypes = {
   fullWidth: PropTypes.bool,
-  matches: PropTypes.bool,
+  width: PropTypes.number,
   handleOnClick: PropTypes.func,
 };
 
 ButtonGrid.defaultProps = {
   fullWidth: false,
-  matches: false,
+  width: 360,
   handleOnClick: () => {},
 };
 

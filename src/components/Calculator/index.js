@@ -23,14 +23,15 @@ const useStyles = makeStyles((theme) => {
 
 const Calculator = ({ fullWidth, value, operator, handleOnClick }) => {
   const matches = useMediaQuery("(min-width:768px)");
-  const classes = useStyles({ fullWidth, width: matches ? 480 : 360 });
+  const width = matches ? 480 : 360;
+  const classes = useStyles({ fullWidth, width });
 
   return (
     <div className={classes.root}>
       <DisplayBoard value={value} operator={operator} />
       <ButtonGrid
         fullWidth={fullWidth}
-        matches={matches}
+        width={width}
         handleOnClick={handleOnClick}
       />
     </div>
