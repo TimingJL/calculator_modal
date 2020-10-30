@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Numbers from "./Numbers";
@@ -56,4 +56,4 @@ ButtonGrid.defaultProps = {
   handleOnClick: () => {},
 };
 
-export default ButtonGrid;
+export default memo(ButtonGrid);
