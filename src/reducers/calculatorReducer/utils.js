@@ -1,3 +1,6 @@
+/*
+Generate suitable factor which is a power of 10 for avoiding round-off errors.
+*/
 const makeFactor = (params) => {
   const decimalPlaceNumberArr = params
     .map((param) => param.split("."))
@@ -9,6 +12,9 @@ const makeFactor = (params) => {
   return 10 ** factor;
 };
 
+/*
+Calculate expression by using integer instead of float to avoid some common case of round-off errors.
+*/
 const makeEvaluateExpression = (numbers, operator, factor) => {
   const expression =
     ["*", "/"].indexOf(operator) > -1
