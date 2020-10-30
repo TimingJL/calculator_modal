@@ -6,38 +6,43 @@ const useStyles = makeStyles(() => ({
   root: (props) => ({
     minHeight: 96,
     marginTop: props.fullWidth ? 0 : 24,
-    margin: "0 16px",
-    display: "flex",
-    alignItems: "flex-end",
+    padding: "0 16px",
+    textAlign: "right",
+    color: "white",
   }),
-  input: {
+  displayOperator: {
+    height: 20,
+  },
+  displayValue: {
     appearance: "none",
     outline: "none",
     border: "none",
     background: "none",
     fontSize: 68,
-    color: "white",
-    textAlign: "right",
     width: "100%",
     boxSizing: "border-box",
+    overflowX: "auto",
   },
 }));
 
-const InputForm = ({ value }) => {
+const DisplayBoard = ({ value, operator }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <input className={classes.input} type="text" value={value} readOnly />
+      <div className={classes.displayOperator}>{operator}</div>
+      <div className={classes.displayValue}>{value}</div>
     </div>
   );
 };
 
-InputForm.propTypes = {
-  value: PropTypes.number,
+DisplayBoard.propTypes = {
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  operator: PropTypes.string,
 };
 
-InputForm.defaultProps = {
+DisplayBoard.defaultProps = {
   value: 0,
+  operator: "",
 };
 
-export default InputForm;
+export default DisplayBoard;
