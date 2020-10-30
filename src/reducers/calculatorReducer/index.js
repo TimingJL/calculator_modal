@@ -16,17 +16,27 @@ const initialState = {
   operator: "",
 };
 
+const makeFactor = (params) => {
+  const decimalPlaceNumberArr = params
+    .map((param) => param.split("."))
+    .filter((item) => item.length > 1)
+    .map((item) => item[1].length);
+  const factor = decimalPlaceNumberArr.length
+    ? Math.max(...decimalPlaceNumberArr)
+    : 0;
+  return 10 ** factor;
+};
+
 const execEquals = (state) => {
   const { temp, operator } = state;
   if (operator && operator !== "=") {
-    const factor = 10 ** Math.max(temp[0].length, temp[1].length);
+    const factor = makeFactor(temp);
     const expression =
       ["*", "/"].indexOf(state.operator) > -1
         ? `((${temp[0]}*${factor})${state.operator}(${temp[1]}*${factor}) / ${
             factor * factor
           })`
         : `(((${temp[0]}*${factor})${state.operator}(${temp[1]}*${factor})) / ${factor})`;
-    console.log("expression: ", expression);
     const updatedValue = evaluate(expression).toString();
     return update(state, {
       value: { $set: updatedValue },
@@ -76,7 +86,7 @@ const updatePlusMinus = (state) => {
 const calculateArithmeticOperation = (state, operator) => {
   const { temp } = state;
   if (state.operator && state.operator !== "=") {
-    const factor = 10 ** Math.max(temp[0].length, temp[1].length);
+    const factor = makeFactor(temp);
     const expression =
       ["*", "/"].indexOf(state.operator) > -1
         ? `((${temp[0]}*${factor})${state.operator}(${temp[1]}*${factor}) / ${
