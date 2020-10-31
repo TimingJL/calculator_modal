@@ -24,7 +24,7 @@ const StyledButton = withStyles((theme) => {
       color: "white",
       background: color.teachesOrange,
       borderRadius: 50,
-      padding: "8px 20px",
+      padding: "12px 28px",
       fontSize: 20,
       boxSizing: "border-box",
       transition: "all .3s ease-in-out",
