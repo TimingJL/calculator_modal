@@ -1,8 +1,9 @@
-import React, { useState, useCallback, Suspense } from "react";
+import React, { useState, useCallback, Suspense, lazy } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
 import AdaptiveModal from "components/AdaptiveModal";
+import SwitchButton from "components/SwitchButton";
 import { isMobile } from "react-device-detect";
 import {
   updateNumbers,
@@ -13,10 +14,49 @@ import {
   addDecimalPoint,
   translateToPercentage,
 } from "actions/calculatorActions";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 
-const Calculator = React.lazy(() => import("components/Calculator"));
+const Calculator = lazy(() => import("components/Calculator"));
+
+const StyledButton = withStyles((theme) => {
+  const { color, boxShadow } = theme;
+  return {
+    root: {
+      color: "white",
+      background: color.primary,
+      borderRadius: 50,
+      padding: "12px 28px",
+      fontSize: 20,
+      boxSizing: "border-box",
+      transition: "all .3s ease-in-out",
+      "&:hover": {
+        background: color.primary,
+        boxShadow: boxShadow.default,
+      },
+    },
+  };
+})(Button);
+
+const useStyles = makeStyles((theme) => {
+  const { color } = theme;
+  return {
+    root: {
+      background: color.primaryBackground,
+      height: "100vh",
+    },
+    container: {
+      height: "50vh",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      flexDirection: "column",
+    },
+  };
+});
 
 const MainPage = ({
+  themeMode,
+  handleOnSetThemeMode,
   value,
   operator,
   handleUpdateNumbers,
@@ -27,6 +67,7 @@ const MainPage = ({
   handleOnAddDecimalPoint,
   handleTranslateToPercentage,
 }) => {
+  const classes = useStyles();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const variant = isMobile ? "bottom-sheet" : "draggable-modal";
 
@@ -55,30 +96,36 @@ const MainPage = ({
   }, []);
 
   return (
-    <div>
-      <Button color="primary" onClick={handleOnModalOpen}>
-        Open
-      </Button>
-      <AdaptiveModal
-        variant={variant}
-        open={isModalOpen}
-        handleClose={handleOnModalClose}
-        content={
-          <Suspense fallback={<div>Loading...</div>}>
-            <Calculator
-              fullWidth={isMobile}
-              value={value}
-              operator={operator}
-              handleOnClick={handleOnClickCalculatorButton}
-            />
-          </Suspense>
-        }
-      />
+    <div className={classes.root}>
+      <div className={classes.container}>
+        <StyledButton onClick={handleOnModalOpen}>計算機 Modal</StyledButton>
+        <SwitchButton
+          label="Dark mode"
+          isDarkMode={themeMode === "dark"}
+          handleChange={handleOnSetThemeMode}
+        />
+        <AdaptiveModal
+          variant={variant}
+          open={isModalOpen}
+          handleClose={handleOnModalClose}
+          content={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Calculator
+                fullWidth={isMobile}
+                value={value}
+                operator={operator}
+                handleOnClick={handleOnClickCalculatorButton}
+              />
+            </Suspense>
+          }
+        />
+      </div>
     </div>
   );
 };
 
 MainPage.propTypes = {
+  themeMode: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   operator: PropTypes.string,
   handleUpdateNumbers: PropTypes.func,
@@ -88,9 +135,11 @@ MainPage.propTypes = {
   handleOnClickPlusMinus: PropTypes.func,
   handleOnAddDecimalPoint: PropTypes.func,
   handleTranslateToPercentage: PropTypes.func,
+  handleOnSetThemeMode: PropTypes.func,
 };
 
 MainPage.defaultProps = {
+  themeMode: "",
   value: 0,
   operator: "",
   handleUpdateNumbers: () => {},
@@ -100,6 +149,7 @@ MainPage.defaultProps = {
   handleOnClickPlusMinus: () => {},
   handleOnAddDecimalPoint: () => {},
   handleTranslateToPercentage: () => {},
+  handleOnSetThemeMode: () => {},
 };
 
 const mapStateToProps = (state) => {

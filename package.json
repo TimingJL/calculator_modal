@@ -54,6 +54,7 @@
     ]
   },
   "devDependencies": {
-    "redux-devtools": "^3.7.0"
+    "redux-devtools": "^3.7.0",
+    "webpack-bundle-analyzer": "^3.9.0"
   }
 }
