@@ -1,4 +1,4 @@
-import React, { useState, useCallback, Suspense } from "react";
+import React, { useState, useCallback, Suspense, lazy } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
@@ -14,7 +14,7 @@ import {
   translateToPercentage,
 } from "actions/calculatorActions";
 
-const Calculator = React.lazy(() => import("components/Calculator"));
+const Calculator = lazy(() => import("components/Calculator"));
 
 const MainPage = ({
   value,
