@@ -16,12 +16,18 @@ const makeFactor = (params) => {
 Calculate expression by using integer instead of float to avoid some common case of round-off errors.
 */
 const makeEvaluateExpression = (numbers, operator, factor) => {
-  const expression =
-    ["*", "/"].indexOf(operator) > -1
-      ? `((${numbers[0]}*${factor})${operator}(${numbers[1]}*${factor}) / ${
-          factor * factor
-        })`
-      : `(((${numbers[0]}*${factor})${operator}(${numbers[1]}*${factor})) / ${factor})`;
+  let expression = "";
+  if (["+", "-"].indexOf(operator) > -1) {
+    expression = `(((${numbers[0]}*${factor})${operator}(${numbers[1]}*${factor})) / ${factor})`;
+  }
+  if (operator === "*") {
+    expression = `((${numbers[0]}*${factor})${operator}(${
+      numbers[1]
+    }*${factor}) / ${factor * factor})`;
+  }
+  if (operator === "/") {
+    expression = `(${numbers[0]}*${factor})/(${numbers[1]}*${factor})`;
+  }
   return expression;
 };
 
