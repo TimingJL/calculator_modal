@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
 import AdaptiveModal from "components/AdaptiveModal";
 import SwitchButton from "components/SwitchButton";
-import { isMobile } from "react-device-detect";
+import useDeviceDetect from "customHooks/useDeviceDetect";
 import {
   updateNumbers,
   calculateArithmeticOperation,
@@ -68,6 +68,7 @@ const MainPage = ({
   handleTranslateToPercentage,
 }) => {
   const classes = useStyles();
+  const { isMobile } = useDeviceDetect();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const variant = isMobile ? "bottom-sheet" : "draggable-modal";
 
