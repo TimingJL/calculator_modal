@@ -2,7 +2,12 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
 const sharedProperty = {
-  calculator: {},
+  color: {
+    teachesOrange: "#f98c2d",
+  },
+  boxShadow: {
+    default: "0 1px 6px rgba(32,33,36,.28)",
+  },
 };
 
 const customTheme = {

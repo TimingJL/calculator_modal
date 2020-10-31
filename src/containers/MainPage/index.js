@@ -13,8 +13,37 @@ import {
   addDecimalPoint,
   translateToPercentage,
 } from "actions/calculatorActions";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 const Calculator = lazy(() => import("components/Calculator"));
+
+const StyledButton = withStyles((theme) => {
+  const { color, boxShadow } = theme;
+  return {
+    root: {
+      color: "white",
+      background: color.teachesOrange,
+      borderRadius: 50,
+      padding: "8px 20px",
+      fontSize: 20,
+      boxSizing: "border-box",
+      transition: "all .3s ease-in-out",
+      "&:hover": {
+        background: color.teachesOrange,
+        boxShadow: boxShadow.default,
+      },
+    },
+  };
+})(Button);
+
+const useStyles = makeStyles(() => ({
+  root: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "50vh",
+  },
+}));
 
 const MainPage = ({
   value,
@@ -27,6 +56,7 @@ const MainPage = ({
   handleOnAddDecimalPoint,
   handleTranslateToPercentage,
 }) => {
+  const classes = useStyles();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const variant = isMobile ? "bottom-sheet" : "draggable-modal";
 
@@ -55,10 +85,8 @@ const MainPage = ({
   }, []);
 
   return (
-    <div>
-      <Button color="primary" onClick={handleOnModalOpen}>
-        Open
-      </Button>
+    <div className={classes.root}>
+      <StyledButton onClick={handleOnModalOpen}>計算機 Modal</StyledButton>
       <AdaptiveModal
         variant={variant}
         open={isModalOpen}
