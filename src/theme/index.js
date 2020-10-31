@@ -11,7 +11,34 @@ const sharedProperty = {
 };
 
 const customTheme = {
+  dark: {
+    color: {
+      primary: "#323334",
+      primaryBackground: "#000001",
+    },
+    calculator: {
+      button: {
+        numbers: {
+          background: "#323334",
+          color: "#fff",
+        },
+        arithmeticOperator: {
+          background: "#FCA00B",
+          color: "#fff",
+        },
+        otherOperator: {
+          background: "#afafaf",
+          color: "#000000",
+        },
+      },
+      background: "#000001",
+    },
+  },
   blue: {
+    color: {
+      primary: "#f98c2d",
+      primaryBackground: "white",
+    },
     calculator: {
       button: {
         numbers: {
@@ -32,8 +59,18 @@ const customTheme = {
   },
 };
 
-export const blueTheme = createMuiTheme({
+const blueTheme = createMuiTheme({
   ...sharedProperty,
   ...customTheme.blue,
   palette: {},
 });
+
+const darkTheme = createMuiTheme({
+  ...sharedProperty,
+  ...customTheme.dark,
+  palette: {
+    type: "dark",
+  },
+});
+
+export { blueTheme, darkTheme };

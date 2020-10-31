@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
 import AdaptiveModal from "components/AdaptiveModal";
+import SwitchButton from "components/SwitchButton";
 import { isMobile } from "react-device-detect";
 import {
   updateNumbers,
@@ -22,30 +23,40 @@ const StyledButton = withStyles((theme) => {
   return {
     root: {
       color: "white",
-      background: color.teachesOrange,
+      background: color.primary,
       borderRadius: 50,
       padding: "12px 28px",
       fontSize: 20,
       boxSizing: "border-box",
       transition: "all .3s ease-in-out",
       "&:hover": {
-        background: color.teachesOrange,
+        background: color.primary,
         boxShadow: boxShadow.default,
       },
     },
   };
 })(Button);
 
-const useStyles = makeStyles(() => ({
-  root: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "50vh",
-  },
-}));
+const useStyles = makeStyles((theme) => {
+  const { color } = theme;
+  return {
+    root: {
+      background: color.primaryBackground,
+      height: "100vh",
+    },
+    container: {
+      height: "50vh",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      flexDirection: "column",
+    },
+  };
+});
 
 const MainPage = ({
+  themeMode,
+  handleOnSetThemeMode,
   value,
   operator,
   handleUpdateNumbers,
@@ -86,27 +97,35 @@ const MainPage = ({
 
   return (
     <div className={classes.root}>
-      <StyledButton onClick={handleOnModalOpen}>計算機 Modal</StyledButton>
-      <AdaptiveModal
-        variant={variant}
-        open={isModalOpen}
-        handleClose={handleOnModalClose}
-        content={
-          <Suspense fallback={<div>Loading...</div>}>
-            <Calculator
-              fullWidth={isMobile}
-              value={value}
-              operator={operator}
-              handleOnClick={handleOnClickCalculatorButton}
-            />
-          </Suspense>
-        }
-      />
+      <div className={classes.container}>
+        <StyledButton onClick={handleOnModalOpen}>計算機 Modal</StyledButton>
+        <SwitchButton
+          label="Dark mode"
+          isDarkMode={themeMode === "dark"}
+          handleChange={handleOnSetThemeMode}
+        />
+        <AdaptiveModal
+          variant={variant}
+          open={isModalOpen}
+          handleClose={handleOnModalClose}
+          content={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Calculator
+                fullWidth={isMobile}
+                value={value}
+                operator={operator}
+                handleOnClick={handleOnClickCalculatorButton}
+              />
+            </Suspense>
+          }
+        />
+      </div>
     </div>
   );
 };
 
 MainPage.propTypes = {
+  themeMode: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   operator: PropTypes.string,
   handleUpdateNumbers: PropTypes.func,
@@ -116,9 +135,11 @@ MainPage.propTypes = {
   handleOnClickPlusMinus: PropTypes.func,
   handleOnAddDecimalPoint: PropTypes.func,
   handleTranslateToPercentage: PropTypes.func,
+  handleOnSetThemeMode: PropTypes.func,
 };
 
 MainPage.defaultProps = {
+  themeMode: "",
   value: 0,
   operator: "",
   handleUpdateNumbers: () => {},
@@ -128,6 +149,7 @@ MainPage.defaultProps = {
   handleOnClickPlusMinus: () => {},
   handleOnAddDecimalPoint: () => {},
   handleTranslateToPercentage: () => {},
+  handleOnSetThemeMode: () => {},
 };
 
 const mapStateToProps = (state) => {
