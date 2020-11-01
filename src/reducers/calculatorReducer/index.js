@@ -1,5 +1,4 @@
 import update from "react-addons-update";
-import { evaluate } from "mathjs";
 import {
   UPDATE_NUMBERS,
   CALCULATE_ARITHMETIC_OPERATION,
@@ -9,7 +8,7 @@ import {
   ADD_DECIMAL_POINT,
   TRANSLATE_TO_PERCENTAGE,
 } from "actions/calculatorActions";
-import { makeFactor, makeEvaluateExpression } from "./utils";
+import { calculate } from "./utils";
 
 const initialState = {
   temp: ["0", "0"],
@@ -20,9 +19,7 @@ const initialState = {
 const execEquals = (state) => {
   const { temp, operator } = state;
   if (operator && operator !== "=") {
-    const factor = makeFactor(temp);
-    const expression = makeEvaluateExpression(temp, state.operator, factor);
-    const updatedValue = evaluate(expression).toString();
+    const updatedValue = calculate(temp, operator);
     return update(state, {
       value: { $set: updatedValue },
       operator: { $set: "=" },
@@ -72,9 +69,7 @@ const updatePlusMinus = (state) => {
 const calculateArithmeticOperation = (state, operator) => {
   const { temp } = state;
   if (state.operator && state.operator !== "=") {
-    const factor = makeFactor(temp);
-    const expression = makeEvaluateExpression(temp, state.operator, factor);
-    const updatedValue = evaluate(expression).toString();
+    const updatedValue = calculate(temp, operator);
     return update(state, {
       value: { $set: updatedValue },
       temp: { $set: [updatedValue, "0"] },
@@ -115,8 +110,7 @@ const translateIntegerToFloat = (state) => {
 const translateToPercentage = (state) => {
   const { temp, operator } = state;
   const tempIndex = operator && operator !== "=" ? 1 : 0;
-  const expression = `${temp[tempIndex]} / 100`;
-  const updatedValue = evaluate(expression).toString();
+  const updatedValue = calculate([temp[tempIndex], 100], "/");
   return update(state, {
     value: { $set: updatedValue },
     temp: {
