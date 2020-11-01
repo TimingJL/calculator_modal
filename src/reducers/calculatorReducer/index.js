@@ -1,4 +1,4 @@
-import update from "react-addons-update";
+import update from "immutability-helper";
 import {
   UPDATE_NUMBERS,
   CALCULATE_ARITHMETIC_OPERATION,
