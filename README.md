@@ -1,5 +1,7 @@
 # 計算機 modal
 
+[Demo](https://timingjl.github.io/calculator_modal/)
+
 ## 判斷設備為手機版與電腦版
 
 判斷應用程式應該要顯示手機版或是電腦版，會根據規格不同，作法而有所不同。
