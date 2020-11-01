@@ -1,5 +1,6 @@
 {
   "name": "teaches_interview_examination",
+  "homepage": "https://timingjl.github.io/calculator_modal/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -32,6 +33,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "predeplay": "npm run build",
+    "deploy": "gh-pages - d build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -53,6 +56,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^3.1.0",
     "redux-devtools": "^3.7.0",
     "webpack-bundle-analyzer": "^3.9.0"
   }
