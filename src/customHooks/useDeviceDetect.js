@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function useDeviceDetect() {
-  const [isMobile, setMobile] = React.useState(false);
+  const [isMobile, setMobile] = useState(false);
 
   useEffect(() => {
     const userAgent =
