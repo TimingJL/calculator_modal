@@ -99,7 +99,7 @@ gridTemplateAreas: `
 
 但使用 Immutable.js 就無法再用原生的 js 資料型態做操作，所有物件的操作都需要使用 Immutable.js 的 Map/List ，並且若跟後端溝通，也要記得做資料的轉換，資料轉換的時候也需要再多花運算資源。
 
-因此在這邊我選擇使用 `immutability-helper`
+因此在這邊我選擇使用 [immutability-helper](https://www.npmjs.com/package/immutability-helper)，讓我們做到保有原本的 js 物件操作，但又能夠有 immutable 的效果。
 
 ### Round-off errors
 
