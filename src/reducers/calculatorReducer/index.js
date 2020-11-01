@@ -69,7 +69,7 @@ const updatePlusMinus = (state) => {
 const calculateArithmeticOperation = (state, operator) => {
   const { temp } = state;
   if (state.operator && state.operator !== "=") {
-    const updatedValue = calculate(temp, operator);
+    const updatedValue = calculate(temp, state.operator);
     return update(state, {
       value: { $set: updatedValue },
       temp: { $set: [updatedValue, "0"] },
